@@ -26,4 +26,7 @@ abstract final class GcSpacing {
 
   /// Objetivo táctil mínimo de accesibilidad (48 dp).
   static const double minTouchTarget = 48.0;
+
+  /// Despeje inferior para que el contenido no quede bajo la isla de navegación (88 dp).
+  static const double navBarClearance = 88.0;
 }

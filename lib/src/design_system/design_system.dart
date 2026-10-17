@@ -19,5 +19,6 @@ export 'widgets/day_pills.dart';
 export 'widgets/empty_state.dart';
 export 'widgets/gc_buttons.dart';
 export 'widgets/gc_card.dart';
+export 'widgets/gc_dialogs.dart';
 export 'widgets/gc_scaffold.dart';
 export 'widgets/gc_text_field.dart';

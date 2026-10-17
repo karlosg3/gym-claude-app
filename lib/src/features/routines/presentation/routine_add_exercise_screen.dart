@@ -50,10 +50,7 @@ class _RoutineAddExerciseScreenState
     final routineAsync = ref.watch(routineDetailProvider(widget.routineId));
 
     final filterItems = [
-      FilterChipItem<MuscleGroup?>(
-        value: null,
-        label: l10n.exercisesFilterAll,
-      ),
+      FilterChipItem<MuscleGroup?>(value: null, label: l10n.exercisesFilterAll),
       for (final g in MuscleGroup.values)
         FilterChipItem<MuscleGroup?>(
           value: g,
@@ -100,7 +97,8 @@ class _RoutineAddExerciseScreenState
           libraryAsync.when(
             data: (allExercises) {
               final assignedExerciseIds = routineAsync.maybeWhen(
-                data: (routine) => routine
+                data: (routine) =>
+                    routine
                         ?.itemsFor(widget.weekday)
                         .map((it) => it.exercise.id)
                         .toSet() ??
@@ -158,67 +156,68 @@ class _RoutineAddExerciseScreenState
                   vertical: GcSpacing.xs,
                 ),
                 sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final exercise = filtered[index];
-                      return Container(
-                        margin: const EdgeInsets.only(bottom: GcSpacing.sm),
-                        decoration: BoxDecoration(
-                          color: colors.surfaceSunken,
-                          borderRadius: BorderRadius.circular(GcRadii.md),
-                          border: Border.all(color: colors.border),
-                        ),
-                        child: ListTile(
-                          onTap: () async {
-                            try {
-                              await ref
-                                  .read(routinesServiceProvider)
-                                  .addExercise(
-                                    widget.routineId,
-                                    widget.weekday,
-                                    exercise.id,
-                                  );
-                              if (context.mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(l10n.routineExerciseAdded),
-                                    duration: const Duration(seconds: 2),
-                                  ),
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    final exercise = filtered[index];
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: GcSpacing.sm),
+                      decoration: BoxDecoration(
+                        color: colors.surfaceSunken,
+                        borderRadius: BorderRadius.circular(GcRadii.md),
+                        border: Border.all(color: colors.border),
+                      ),
+                      child: ListTile(
+                        onTap: () async {
+                          try {
+                            await ref
+                                .read(routinesServiceProvider)
+                                .addExercise(
+                                  widget.routineId,
+                                  widget.weekday,
+                                  exercise.id,
                                 );
-                                Navigator.of(context).pop();
-                              }
-                            } on DomainException catch (e) {
-                              if (context.mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(e.message)),
-                                );
-                              }
+                            if (context.mounted) {
+                              showGcSnackBar(
+                                context,
+                                l10n.routineExerciseAdded,
+                                aboveNavBar: true,
+                              );
+                              Navigator.of(context).pop();
                             }
-                          },
-                          leading: ExerciseAvatar(
-                            name: exercise.name,
-                            muscleGroup: exercise.muscleGroup,
+                          } on DomainException catch (e) {
+                            if (context.mounted) {
+                              showGcSnackBar(
+                                context,
+                                e.message,
+                                aboveNavBar: true,
+                              );
+                            }
+                          }
+                        },
+                        leading: ExerciseAvatar(
+                          name: exercise.name,
+                          muscleGroup: exercise.muscleGroup,
+                        ),
+                        title: Text(
+                          exercise.name,
+                          style: textStyles.bodyStrong,
+                        ),
+                        subtitle: Text(
+                          MuscleTag.localizedLabel(
+                            context,
+                            exercise.muscleGroup,
                           ),
-                          title: Text(
-                            exercise.name,
-                            style: textStyles.bodyStrong,
-                          ),
-                          subtitle: Text(
-                            MuscleTag.localizedLabel(context, exercise.muscleGroup),
-                            style: textStyles.label.copyWith(
-                              color: colors.textMuted,
-                            ),
-                          ),
-                          trailing: Icon(
-                            GcIcons.add,
-                            color: colors.accent,
-                            size: GcIcons.sizeMd,
+                          style: textStyles.label.copyWith(
+                            color: colors.textMuted,
                           ),
                         ),
-                      );
-                    },
-                    childCount: filtered.length,
-                  ),
+                        trailing: Icon(
+                          GcIcons.add,
+                          color: colors.accent,
+                          size: GcIcons.sizeMd,
+                        ),
+                      ),
+                    );
+                  }, childCount: filtered.length),
                 ),
               );
             },
@@ -234,8 +233,12 @@ class _RoutineAddExerciseScreenState
               ),
             ),
           ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 80),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height:
+                  MediaQuery.paddingOf(context).bottom +
+                  GcSpacing.navBarClearance,
+            ),
           ),
         ],
       ),

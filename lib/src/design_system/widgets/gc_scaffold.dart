@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:gym_claude/src/design_system/theme/app_theme.dart';
 import 'package:gym_claude/src/design_system/tokens/gc_spacing.dart';
@@ -37,14 +38,18 @@ class GcScaffold extends StatelessWidget {
   final bool safeAreaBottom;
 
   bool get _hasHeader =>
-      title != null || overline != null || leading != null || actions.isNotEmpty;
+      title != null ||
+      overline != null ||
+      leading != null ||
+      actions.isNotEmpty;
 
   @override
   Widget build(BuildContext context) {
     final c = context.gcColors;
     final t = context.gcText;
 
-    final effectivePadding = contentPadding ??
+    final effectivePadding =
+        contentPadding ??
         (scrollable
             ? const EdgeInsets.symmetric(
                 horizontal: GcSpacing.screenHorizontal,
@@ -80,41 +85,25 @@ class GcScaffold extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         if (overline != null) ...[
-                          Text(
-                            overline!.toUpperCase(),
-                            style: t.overline,
-                          ),
+                          Text(overline!.toUpperCase(), style: t.overline),
                           const SizedBox(height: 2),
                         ],
-                        if (title != null)
-                          Text(
-                            title!,
-                            style: t.title,
-                          ),
+                        if (title != null) Text(title!, style: t.title),
                       ],
                     ),
                   ),
                   if (actions.isNotEmpty)
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: actions,
-                    ),
+                    Row(mainAxisSize: MainAxisSize.min, children: actions),
                 ],
               ),
             ),
           ),
         Expanded(
           child: scrollable
-              ? SingleChildScrollView(
-                  padding: effectivePadding,
-                  child: body,
-                )
+              ? SingleChildScrollView(padding: effectivePadding, child: body)
               : (effectivePadding == EdgeInsets.zero
-                  ? body
-                  : Padding(
-                      padding: effectivePadding,
-                      child: body,
-                    )),
+                    ? body
+                    : Padding(padding: effectivePadding, child: body)),
         ),
       ],
     );
@@ -122,10 +111,9 @@ class GcScaffold extends StatelessWidget {
     return Scaffold(
       backgroundColor: c.background,
       floatingActionButton: floatingActionButton,
-      floatingActionButtonLocation: floatingActionButtonLocation ??
-          (floatingActionButton != null
-              ? const GcAboveNavFabLocation()
-              : null),
+      floatingActionButtonLocation:
+          floatingActionButtonLocation ??
+          (floatingActionButton != null ? const GcAboveNavFabLocation() : null),
       bottomNavigationBar: bottomBar,
       body: SafeArea(
         bottom: safeAreaBottom,
@@ -145,7 +133,9 @@ class GcScaffold extends StatelessWidget {
 /// Ubicación de FAB flotante que se alinea a la derecha con margen estándar de pantalla
 /// (`GcSpacing.screenHorizontal`) y despeje vertical para flotar por encima de la isla de navegación.
 class GcAboveNavFabLocation extends StandardFabLocation with FabEndOffsetX {
-  const GcAboveNavFabLocation({this.navBarClearance = 88.0});
+  const GcAboveNavFabLocation({
+    this.navBarClearance = GcSpacing.navBarClearance,
+  });
 
   /// Despeje vertical adicional respecto a la parte inferior (altura de isla + margen).
   final double navBarClearance;

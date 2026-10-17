@@ -95,12 +95,10 @@ class _RoutineDetailScreenState extends ConsumerState<RoutineDetailScreen> {
   Future<void> _removeItem(BuildContext context, RoutineItem item) async {
     await ref.read(routinesServiceProvider).removeItem(item.id);
     if (context.mounted) {
-      final msg = context.l10n.routineExerciseRemoved;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(msg),
-          duration: const Duration(seconds: 2),
-        ),
+      showGcSnackBar(
+        context,
+        context.l10n.routineExerciseRemoved,
+        aboveNavBar: true,
       );
     }
   }
@@ -173,9 +171,7 @@ class _RoutineDetailScreenState extends ConsumerState<RoutineDetailScreen> {
                   vertical: GcSpacing.sm,
                 ),
                 decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(color: colors.border),
-                  ),
+                  border: Border(bottom: BorderSide(color: colors.border)),
                 ),
                 child: Center(
                   child: DayPills(
@@ -241,7 +237,9 @@ class _RoutineDetailScreenState extends ConsumerState<RoutineDetailScreen> {
                           if (oldIndex < newIndex) {
                             newIndex -= 1;
                           }
-                          ref.read(routinesServiceProvider).reorder(
+                          ref
+                              .read(routinesServiceProvider)
+                              .reorder(
                                 routine.id,
                                 activeDay,
                                 oldIndex,
@@ -267,7 +265,8 @@ class _RoutineDetailScreenState extends ConsumerState<RoutineDetailScreen> {
                   GcSpacing.screenHorizontal,
                   GcSpacing.sm,
                   GcSpacing.screenHorizontal,
-                  MediaQuery.paddingOf(context).bottom + GcSpacing.md,
+                  MediaQuery.paddingOf(context).bottom +
+                      GcSpacing.navBarClearance,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -291,7 +290,8 @@ class _RoutineDetailScreenState extends ConsumerState<RoutineDetailScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text(
-                                'Sesiones de entrenamiento disponibles en la Fase 3'),
+                              'Sesiones de entrenamiento disponibles en la Fase 3',
+                            ),
                             duration: Duration(seconds: 2),
                           ),
                         );
@@ -304,9 +304,8 @@ class _RoutineDetailScreenState extends ConsumerState<RoutineDetailScreen> {
           ),
         );
       },
-      loading: () => const GcScaffold(
-        body: Center(child: CircularProgressIndicator()),
-      ),
+      loading: () =>
+          const GcScaffold(body: Center(child: CircularProgressIndicator())),
       error: (err, _) => GcScaffold(
         body: Center(
           child: Text(
@@ -410,11 +409,7 @@ class _RoutineExerciseTile extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 4),
-                    Icon(
-                      GcIcons.edit,
-                      size: 12,
-                      color: colors.textMuted,
-                    ),
+                    Icon(GcIcons.edit, size: 12, color: colors.textMuted),
                   ],
                 ),
               ),
