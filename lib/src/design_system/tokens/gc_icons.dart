@@ -26,6 +26,7 @@ abstract final class GcIcons {
   static const IconData chevronRight = LucideIcons.chevronRight;
   static const IconData chevronLeft = LucideIcons.chevronLeft;
   static const IconData dragHandle = LucideIcons.gripVertical;
+  static const IconData more = LucideIcons.ellipsisVertical;
 
   // Dominio de entrenamiento y estado
   static const IconData clock = LucideIcons.clock;

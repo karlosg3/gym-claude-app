@@ -44,7 +44,11 @@ abstract final class DateLabels {
       10 => 'octubre',
       11 => 'noviembre',
       12 => 'diciembre',
-      _ => throw ArgumentError.value(month, 'month', 'Mes fuera de rango 1..12'),
+      _ => throw ArgumentError.value(
+        month,
+        'month',
+        'Mes fuera de rango 1..12',
+      ),
     };
   }
 
@@ -60,5 +64,10 @@ abstract final class DateLabels {
     final dayName = weekdayLong(date.weekday);
     final mName = monthName(date.month);
     return '$dayName, ${date.day} de $mName';
+  }
+
+  /// Fecha larga sin coma (`Lunes 22 de junio`).
+  static String longDate(LocalDate date) {
+    return '${weekdayLong(date.weekday)} ${date.day} de ${monthName(date.month)}';
   }
 }
