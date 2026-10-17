@@ -1,0 +1,364 @@
+{
+  "@@locale": "es",
+  "appName": "GymClaude",
+  "@appName": {
+    "description": "Nombre de la aplicación"
+  },
+  "navHome": "Inicio",
+  "@navHome": {
+    "description": "Pestaña de inicio"
+  },
+  "navRoutines": "Rutinas",
+  "@navRoutines": {
+    "description": "Pestaña de rutinas"
+  },
+  "navExercises": "Ejercicios",
+  "@navExercises": {
+    "description": "Pestaña de ejercicios"
+  },
+  "navHistory": "Historial",
+  "@navHistory": {
+    "description": "Pestaña de historial"
+  },
+  "navSettings": "Ajustes",
+  "@navSettings": {
+    "description": "Título de la pantalla de ajustes"
+  },
+  "navWorkout": "Sesión activa",
+  "@navWorkout": {
+    "description": "Título de la pantalla de sesión de entrenamiento"
+  },
+  "navWorkoutSummary": "Resumen de sesión",
+  "@navWorkoutSummary": {
+    "description": "Título de la pantalla de resumen de entrenamiento"
+  },
+  "navExport": "Exportar datos",
+  "@navExport": {
+    "description": "Título de la pantalla de exportación"
+  },
+  "emptyScreenPhase0Desc": "Estructura base lista (Fase 0 — Fundaciones).",
+  "@emptyScreenPhase0Desc": {
+    "description": "Descripción de marcador de posición para las pantallas vacías en la Fase 0"
+  },
+  "errorUnexpectedTitle": "Ha ocurrido un problema inesperado",
+  "@errorUnexpectedTitle": {
+    "description": "Título genérico cuando falla una vista o el arranque"
+  },
+  "errorRetry": "Reintentar",
+  "@errorRetry": {
+    "description": "Etiqueta del botón para reintentar una operación fallida"
+  },
+  "actionBack": "Volver",
+  "@actionBack": {
+    "description": "Etiqueta semántica para el botón de volver atrás"
+  },
+  "settingsSectionProfile": "Perfil",
+  "@settingsSectionProfile": {
+    "description": "Sección de perfil en ajustes"
+  },
+  "settingsNameLabel": "Nombre",
+  "@settingsNameLabel": {
+    "description": "Etiqueta de nombre en perfil"
+  },
+  "settingsNamePlaceholder": "Tu nombre",
+  "@settingsNamePlaceholder": {
+    "description": "Placeholder de nombre en perfil"
+  },
+  "settingsSectionAppearance": "Apariencia",
+  "@settingsSectionAppearance": {
+    "description": "Sección de apariencia en ajustes"
+  },
+  "settingsThemeColorTitle": "Color de acento",
+  "@settingsThemeColorTitle": {
+    "description": "Título de selector de color de acento"
+  },
+  "settingsThemeColorSubtitle": "Personaliza el tono principal de la interfaz",
+  "@settingsThemeColorSubtitle": {
+    "description": "Subtítulo de selector de color de acento"
+  },
+  "colorOrange": "Naranja",
+  "@colorOrange": {
+    "description": "Color naranja de acento"
+  },
+  "colorBlue": "Azul",
+  "@colorBlue": {
+    "description": "Color azul de acento"
+  },
+  "colorGreen": "Verde",
+  "@colorGreen": {
+    "description": "Color verde de acento"
+  },
+  "colorPurple": "Morado",
+  "@colorPurple": {
+    "description": "Color morado de acento"
+  },
+  "colorRed": "Rojo",
+  "@colorRed": {
+    "description": "Color rojo de acento"
+  },
+  "settingsSectionTraining": "Entrenamiento",
+  "@settingsSectionTraining": {
+    "description": "Sección de entrenamiento en ajustes"
+  },
+  "settingsWeeklyGoalTitle": "Meta semanal",
+  "@settingsWeeklyGoalTitle": {
+    "description": "Título de meta semanal"
+  },
+  "settingsWeeklyGoalSubtitle": "Sesiones por semana",
+  "@settingsWeeklyGoalSubtitle": {
+    "description": "Subtítulo de meta semanal"
+  },
+  "settingsDefaultUnitTitle": "Unidad por defecto",
+  "@settingsDefaultUnitTitle": {
+    "description": "Título de unidad por defecto"
+  },
+  "settingsDefaultUnitSubtitle": "Para ejercicios nuevos",
+  "@settingsDefaultUnitSubtitle": {
+    "description": "Subtítulo de unidad por defecto"
+  },
+  "settingsSectionNotifications": "Notificaciones",
+  "@settingsSectionNotifications": {
+    "description": "Sección de notificaciones en ajustes"
+  },
+  "settingsWorkoutReminderTitle": "Recordatorio de entreno",
+  "@settingsWorkoutReminderTitle": {
+    "description": "Título de recordatorio de entreno"
+  },
+  "settingsWorkoutReminderSubtitle": "Aviso los días de tu rutina",
+  "@settingsWorkoutReminderSubtitle": {
+    "description": "Subtítulo de recordatorio de entreno"
+  },
+  "settingsStreakRiskTitle": "Racha en riesgo",
+  "@settingsStreakRiskTitle": {
+    "description": "Título de racha en riesgo"
+  },
+  "settingsStreakRiskSubtitle": "Si no has entrenado a las 20:00",
+  "@settingsStreakRiskSubtitle": {
+    "description": "Subtítulo de racha en riesgo"
+  },
+  "settingsRecordsTitle": "Récords personales",
+  "@settingsRecordsTitle": {
+    "description": "Título de récords personales"
+  },
+  "settingsRecordsSubtitle": "Cuando superas tu máximo",
+  "@settingsRecordsSubtitle": {
+    "description": "Subtítulo de récords personales"
+  },
+  "settingsReminderTimeTitle": "Hora del recordatorio",
+  "@settingsReminderTimeTitle": {
+    "description": "Título de hora de recordatorio"
+  },
+  "settingsSectionData": "Datos",
+  "@settingsSectionData": {
+    "description": "Sección de datos en ajustes"
+  },
+  "settingsExportSubtitle": "Markdown, CSV o PDF",
+  "@settingsExportSubtitle": {
+    "description": "Subtítulo de exportar datos"
+  },
+  "settingsWipeDataButton": "Borrar todos los datos",
+  "@settingsWipeDataButton": {
+    "description": "Botón destructivo de borrar todos los datos"
+  },
+  "settingsWipeConfirmTitle": "¿Borrar todos los datos?",
+  "@settingsWipeConfirmTitle": {
+    "description": "Título del diálogo de confirmación de borrado"
+  },
+  "settingsWipeConfirmMessage": "Se restablecerán las rutinas y el historial. Se volverán a sembrar los ejercicios iniciales y los ajustes por defecto.",
+  "@settingsWipeConfirmMessage": {
+    "description": "Mensaje de advertencia del diálogo de borrado"
+  },
+  "settingsWipeConfirmAction": "Borrar todo",
+  "@settingsWipeConfirmAction": {
+    "description": "Acción de confirmar borrado"
+  },
+  "settingsWipeCancelAction": "Cancelar",
+  "@settingsWipeCancelAction": {
+    "description": "Acción de cancelar borrado"
+  },
+  "settingsFooterAppVersion": "GymClaude v0.5 · local-first",
+  "@settingsFooterAppVersion": {
+    "description": "Versión en pie de página de ajustes"
+  },
+  "settingsFooterPrivacy": "Tus datos no salen de tu dispositivo ni de tus copias de seguridad",
+  "@settingsFooterPrivacy": {
+    "description": "Texto de privacidad local en pie de página de ajustes"
+  },
+  "exercisesCount": "{count, plural, =1{1 ejercicio} other{{count} ejercicios}}",
+  "@exercisesCount": {
+    "description": "Contador de ejercicios en cabecera",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "exercisesSearchPlaceholder": "Buscar ejercicio",
+  "@exercisesSearchPlaceholder": {
+    "description": "Placeholder del buscador de ejercicios"
+  },
+  "exercisesFilterAll": "Todos",
+  "@exercisesFilterAll": {
+    "description": "Pestaña o chip de todos los grupos musculares"
+  },
+  "exercisesEmptySearch": "Sin resultados",
+  "@exercisesEmptySearch": {
+    "description": "Texto cuando la búsqueda no devuelve ejercicios"
+  },
+  "exercisesMaxLabel": "máximo",
+  "@exercisesMaxLabel": {
+    "description": "Etiqueta bajo el peso máximo en listas y tarjetas"
+  },
+  "exercisesLastLabel": "última",
+  "@exercisesLastLabel": {
+    "description": "Etiqueta bajo el peso de la última sesión"
+  },
+  "exercisesSessionsLabel": "sesiones",
+  "@exercisesSessionsLabel": {
+    "description": "Etiqueta del número de sesiones completadas"
+  },
+  "exerciseDetailUnitTitle": "Unidad de peso",
+  "@exerciseDetailUnitTitle": {
+    "description": "Título de unidad de peso en detalle de ejercicio"
+  },
+  "exerciseDetailUnitSubtitle": "Solo para este ejercicio",
+  "@exerciseDetailUnitSubtitle": {
+    "description": "Subtítulo de unidad de peso en detalle de ejercicio"
+  },
+  "exerciseDetailNoDataTitle": "Aún no hay registros",
+  "@exerciseDetailNoDataTitle": {
+    "description": "Título de sin datos en detalle de ejercicio"
+  },
+  "exerciseDetailNoDataSubtitle": "Inicia una sesión y registra series para ver tu progreso aquí.",
+  "@exerciseDetailNoDataSubtitle": {
+    "description": "Subtítulo de sin datos en detalle de ejercicio"
+  },
+  "exerciseDetailDescTitle": "Descripción",
+  "@exerciseDetailDescTitle": {
+    "description": "Título de sección descripción"
+  },
+  "exerciseDetailNoDesc": "Sin descripción.",
+  "@exerciseDetailNoDesc": {
+    "description": "Texto cuando el ejercicio no tiene descripción"
+  },
+  "exerciseDetailProgressTitle": "Progreso · peso máximo",
+  "@exerciseDetailProgressTitle": {
+    "description": "Título del gráfico de progreso en detalle"
+  },
+  "exerciseDetailHistoryTitle": "Historial reciente",
+  "@exerciseDetailHistoryTitle": {
+    "description": "Título de historial reciente en detalle"
+  },
+  "exerciseFormNewTitle": "Nuevo ejercicio",
+  "@exerciseFormNewTitle": {
+    "description": "Título al crear nuevo ejercicio"
+  },
+  "exerciseFormEditTitle": "Editar ejercicio",
+  "@exerciseFormEditTitle": {
+    "description": "Título al editar ejercicio existente"
+  },
+  "exerciseFormNameLabel": "Nombre",
+  "@exerciseFormNameLabel": {
+    "description": "Etiqueta de nombre en formulario"
+  },
+  "exerciseFormNamePlaceholder": "Ej. Press de banca",
+  "@exerciseFormNamePlaceholder": {
+    "description": "Placeholder de nombre en formulario"
+  },
+  "exerciseFormMuscleLabel": "Grupo muscular",
+  "@exerciseFormMuscleLabel": {
+    "description": "Etiqueta de grupo muscular"
+  },
+  "exerciseFormUnitLabel": "Unidad de peso",
+  "@exerciseFormUnitLabel": {
+    "description": "Etiqueta de unidad de peso en formulario"
+  },
+  "exerciseFormBodyweightLabel": "Usa peso corporal",
+  "@exerciseFormBodyweightLabel": {
+    "description": "Interruptor de peso corporal"
+  },
+  "exerciseFormBodyweightSubtitle": "El peso se registrará como lastre adicional (+10 kg)",
+  "@exerciseFormBodyweightSubtitle": {
+    "description": "Subtítulo de peso corporal"
+  },
+  "exerciseFormDescLabel": "Descripción",
+  "@exerciseFormDescLabel": {
+    "description": "Etiqueta de descripción en formulario"
+  },
+  "exerciseFormDescOptional": "· opcional",
+  "@exerciseFormDescOptional": {
+    "description": "Texto opcional en descripción"
+  },
+  "exerciseFormDescPlaceholder": "Técnica, notas o recordatorios…",
+  "@exerciseFormDescPlaceholder": {
+    "description": "Placeholder de descripción en formulario"
+  },
+  "exerciseFormSave": "Guardar ejercicio",
+  "@exerciseFormSave": {
+    "description": "Botón principal de guardar ejercicio"
+  },
+  "exerciseFormCancel": "Cancelar",
+  "@exerciseFormCancel": {
+    "description": "Botón de cancelar formulario"
+  },
+  "exerciseFormErrorEmptyName": "El nombre no puede estar vacío",
+  "@exerciseFormErrorEmptyName": {
+    "description": "Error cuando el nombre está vacío"
+  },
+  "exerciseFormErrorDuplicateName": "Ya existe un ejercicio con ese nombre",
+  "@exerciseFormErrorDuplicateName": {
+    "description": "Error cuando ya existe un ejercicio con ese nombre"
+  },
+  "exerciseDeleteTitle": "¿Eliminar ejercicio?",
+  "@exerciseDeleteTitle": {
+    "description": "Título de diálogo de eliminar ejercicio"
+  },
+  "exerciseDeleteMessage": "¿Estás seguro de que deseas eliminar este ejercicio de la biblioteca?",
+  "@exerciseDeleteMessage": {
+    "description": "Mensaje de confirmación de eliminar ejercicio sin historial"
+  },
+  "exerciseArchiveTitle": "Archivar ejercicio",
+  "@exerciseArchiveTitle": {
+    "description": "Título de diálogo de archivar ejercicio"
+  },
+  "exerciseArchiveMessage": "Tiene sesiones registradas. Se ocultará de la biblioteca pero su historial se conserva.",
+  "@exerciseArchiveMessage": {
+    "description": "Mensaje de archivado de ejercicio con historial"
+  },
+  "exerciseDeleteAction": "Eliminar",
+  "@exerciseDeleteAction": {
+    "description": "Acción de confirmar eliminación"
+  },
+  "exerciseArchiveAction": "Archivar",
+  "@exerciseArchiveAction": {
+    "description": "Acción de confirmar archivado"
+  },
+  "exerciseNotFound": "Ejercicio no encontrado",
+  "@exerciseNotFound": {
+    "description": "Texto cuando el id de ejercicio no existe"
+  },
+  "muscleGroupChest": "Pecho",
+  "@muscleGroupChest": {
+    "description": "Grupo muscular Pecho"
+  },
+  "muscleGroupBack": "Espalda",
+  "@muscleGroupBack": {
+    "description": "Grupo muscular Espalda"
+  },
+  "muscleGroupLegs": "Pierna",
+  "@muscleGroupLegs": {
+    "description": "Grupo muscular Pierna"
+  },
+  "muscleGroupShoulders": "Hombro",
+  "@muscleGroupShoulders": {
+    "description": "Grupo muscular Hombro"
+  },
+  "muscleGroupArms": "Brazo",
+  "@muscleGroupArms": {
+    "description": "Grupo muscular Brazo"
+  },
+  "muscleGroupCore": "Core",
+  "@muscleGroupCore": {
+    "description": "Grupo muscular Core"
+  }
+}

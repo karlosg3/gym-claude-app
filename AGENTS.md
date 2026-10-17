@@ -93,8 +93,8 @@ flutter build apk --debug                                  # comprobar que Andro
 
 | Fase | Contenido | Estado | Notas |
 |---|---|---|---|
-| 0 | Fundaciones | Pendiente | |
-| 1 | Ajustes + Ejercicios | Pendiente | |
+| 0 | Fundaciones | Completada | Core, Shared Kernel, Drift base, Design System, GoRouter 4 pestañas, l10n (`es`) y `architecture_test` en verde |
+| 1 | Ajustes + Ejercicios | Completada | Settings (singleton id=1, wipeAllData atómico con evento en bus, debounce, stepper, switches), Exercises (12 ejercicios semilla, búsqueda sin acentos/case-insensitive, borrado físico/lógico según historial, restauración al recrear), pantallas List/Detail/Form y 74 tests en verde |
 | 2 | Rutinas | Pendiente | |
 | 3 | Sesión activa | Pendiente | |
 | 4 | Progreso + Inicio | Pendiente | |

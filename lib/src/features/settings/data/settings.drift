@@ -1,0 +1,17 @@
+import 'package:gym_claude/src/core/domain/app_accent_color.dart';
+import 'package:gym_claude/src/core/domain/weight_unit.dart';
+
+CREATE TABLE settings (
+  id                        INTEGER NOT NULL PRIMARY KEY CHECK (id = 1),
+  user_name                 TEXT    NOT NULL DEFAULT '',
+  weekly_goal               INTEGER NOT NULL DEFAULT 3 CHECK (weekly_goal BETWEEN 1 AND 7),
+  default_unit              ENUMNAME(WeightUnit) NOT NULL DEFAULT 'kg',
+  theme_color               ENUMNAME(AppAccentColor) NOT NULL DEFAULT 'orange',
+  workout_reminder_enabled  BOOLEAN NOT NULL DEFAULT 1,
+  reminder_minutes          INTEGER NOT NULL DEFAULT 1110 CHECK (reminder_minutes BETWEEN 0 AND 1439),
+  streak_risk_enabled       BOOLEAN NOT NULL DEFAULT 1,
+  records_enabled           BOOLEAN NOT NULL DEFAULT 0
+) AS SettingsRow;
+
+watchSettings: SELECT * FROM settings WHERE id = 1;
+getSettings: SELECT * FROM settings WHERE id = 1;

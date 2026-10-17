@@ -1,0 +1,29 @@
+import 'package:gym_claude/src/core/domain/muscle_group.dart';
+import 'package:gym_claude/src/core/domain/weight_unit.dart';
+
+CREATE TABLE exercises (
+  id             INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  name           TEXT    NOT NULL COLLATE NOCASE CHECK (length(trim(name)) BETWEEN 1 AND 80),
+  muscle_group   ENUMNAME(MuscleGroup) NOT NULL,
+  unit           ENUMNAME(WeightUnit)  NOT NULL,
+  is_bodyweight  BOOLEAN NOT NULL DEFAULT 0,
+  description    TEXT    NOT NULL DEFAULT '',
+  archived_at    DATETIME,
+  created_at     DATETIME NOT NULL
+) AS ExerciseRow;
+
+CREATE UNIQUE INDEX exercises_active_name ON exercises (name) WHERE archived_at IS NULL;
+
+watchAllActive:
+SELECT * FROM exercises
+WHERE archived_at IS NULL
+ORDER BY name;
+
+watchByGroup:
+SELECT * FROM exercises
+WHERE archived_at IS NULL
+  AND muscle_group = :group
+ORDER BY name;
+
+findByName: SELECT * FROM exercises WHERE name = :name;
+getById: SELECT * FROM exercises WHERE id = :id;

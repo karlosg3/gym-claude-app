@@ -1,0 +1,71 @@
+import 'package:drift/drift.dart';
+import 'package:gym_claude/src/core/database/connection.dart';
+import 'package:gym_claude/src/core/database/transaction_runner.dart';
+import 'package:gym_claude/src/core/domain/app_accent_color.dart';
+import 'package:gym_claude/src/core/domain/muscle_group.dart';
+import 'package:gym_claude/src/core/domain/weight_unit.dart';
+import 'package:gym_claude/src/features/exercises/data/exercises_dao.dart';
+import 'package:gym_claude/src/features/settings/data/settings_dao.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'app_database.g.dart';
+
+/// Base de datos SQLite local de la aplicación gestionada con Drift.
+@DriftDatabase(
+  include: {
+    '../../features/settings/data/settings.drift',
+    '../../features/exercises/data/exercises.drift',
+  },
+  daos: [
+    SettingsDao,
+    ExercisesDao,
+  ],
+)
+class AppDatabase extends _$AppDatabase {
+  AppDatabase([QueryExecutor? executor]) : super(executor ?? openConnection());
+
+  @override
+  int get schemaVersion => 2;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        beforeOpen: (details) async {
+          await customStatement('PRAGMA foreign_keys = ON');
+        },
+        onCreate: (m) async {
+          await m.createAll();
+          await into(settings).insert(
+            const SettingsCompanion(
+              id: Value(1),
+              userName: Value(''),
+              weeklyGoal: Value(3),
+              defaultUnit: Value(WeightUnit.kg),
+              themeColor: Value(AppAccentColor.orange),
+              workoutReminderEnabled: Value(true),
+              reminderMinutes: Value(1110),
+              streakRiskEnabled: Value(true),
+              recordsEnabled: Value(false),
+            ),
+          );
+          await exercisesDao.seedDefaultExercises(DateTime.now());
+        },
+        onUpgrade: (m, from, to) async {
+          if (from < 2) {
+            await m.addColumn(settings, settings.themeColor);
+          }
+        },
+      );
+}
+
+@Riverpod(keepAlive: true)
+AppDatabase appDatabase(Ref ref) {
+  final db = AppDatabase();
+  ref.onDispose(db.close);
+  return db;
+}
+
+@Riverpod(keepAlive: true)
+TransactionRunner transactionRunner(Ref ref) {
+  final db = ref.watch(appDatabaseProvider);
+  return DriftTransactionRunner(db);
+}
