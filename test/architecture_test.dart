@@ -118,51 +118,45 @@ void main() {
       expect(violations, isEmpty, reason: violations.join('\n'));
     });
 
-    test(
-      'archivos *_calculator|_detector|_planner|_builder|_renderer.dart solo importan Dart puro o domain',
-      () {
-        final pureFileRegex = RegExp(
-          r'_(calculator|detector|planner|builder|renderer)\.dart$',
-        );
-        final violations = <String>[];
+    test('archivos *_calculator|_detector|_planner|_builder|_renderer.dart solo importan Dart puro o domain', () {
+      final pureFileRegex = RegExp(
+        r'_(calculator|detector|planner|builder|renderer)\.dart$',
+      );
+      final violations = <String>[];
 
-        for (final file in dartFilesIn(libSrcDir)) {
-          final path = normalizePath(file.path);
-          if (!pureFileRegex.hasMatch(path)) continue;
+      for (final file in dartFilesIn(libSrcDir)) {
+        final path = normalizePath(file.path);
+        if (!pureFileRegex.hasMatch(path)) continue;
 
-          for (final imp in extractImports(file)) {
-            final allowed =
-                imp.startsWith('dart:') ||
-                imp.startsWith('package:clock/') ||
-                imp.startsWith('package:collection/') ||
-                imp.startsWith('package:meta/') ||
-                imp.startsWith('package:freezed_annotation/') ||
-                imp.contains('/domain/');
-            if (!allowed) {
-              violations.add('$path -> $imp');
-            }
+        for (final imp in extractImports(file)) {
+          final allowed =
+              imp.startsWith('dart:') ||
+              imp.startsWith('package:clock/') ||
+              imp.startsWith('package:collection/') ||
+              imp.startsWith('package:meta/') ||
+              imp.startsWith('package:freezed_annotation/') ||
+              imp.contains('/domain/');
+          if (!allowed) {
+            violations.add('$path -> $imp');
           }
         }
-        expect(violations, isEmpty, reason: violations.join('\n'));
-      },
-    );
+      }
+      expect(violations, isEmpty, reason: violations.join('\n'));
+    });
 
-    test(
-      'ningún archivo fuera de gc_icons.dart importa lucide_icons_flutter directamente',
-      () {
-        final violations = <String>[];
-        for (final file in dartFilesIn(libSrcDir)) {
-          final path = normalizePath(file.path);
-          if (path.endsWith('/gc_icons.dart')) continue;
+    test('ningún archivo fuera de gc_icons.dart importa lucide_icons_flutter directamente', () {
+      final violations = <String>[];
+      for (final file in dartFilesIn(libSrcDir)) {
+        final path = normalizePath(file.path);
+        if (path.endsWith('/gc_icons.dart')) continue;
 
-          for (final imp in extractImports(file)) {
-            if (imp.startsWith('package:lucide_icons_flutter/')) {
-              violations.add('$path -> $imp');
-            }
+        for (final imp in extractImports(file)) {
+          if (imp.startsWith('package:lucide_icons_flutter/')) {
+            violations.add('$path -> $imp');
           }
         }
-        expect(violations, isEmpty, reason: violations.join('\n'));
-      },
-    );
+      }
+      expect(violations, isEmpty, reason: violations.join('\n'));
+    });
   });
 }

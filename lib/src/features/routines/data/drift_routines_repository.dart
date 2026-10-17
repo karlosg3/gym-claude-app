@@ -146,13 +146,15 @@ class DriftRoutinesRepository implements RoutinesRepository {
 
   @override
   Future<void> setScheme(int itemId, RepScheme scheme) {
-    return _dao.updateItemRow(
-      itemId,
-      RoutineItemsCompanion(
-        targetSets: Value(scheme.sets),
-        targetReps: Value(scheme.reps),
-      ),
-    ).then((_) {});
+    return _dao
+        .updateItemRow(
+          itemId,
+          RoutineItemsCompanion(
+            targetSets: Value(scheme.sets),
+            targetReps: Value(scheme.reps),
+          ),
+        )
+        .then((_) {});
   }
 
   List<Routine> _groupRowsToRoutines(List<WatchAllWithItemsResult> rows) {
@@ -187,10 +189,7 @@ class DriftRoutinesRepository implements RoutinesRepository {
             muscleGroup: row.exerciseGroup!,
             unit: row.exerciseUnit!,
           ),
-          scheme: RepScheme(
-            sets: ri.targetSets,
-            reps: ri.targetReps,
-          ),
+          scheme: RepScheme(sets: ri.targetSets, reps: ri.targetReps),
         );
         itemsMap[r.id]!.add(item);
       }

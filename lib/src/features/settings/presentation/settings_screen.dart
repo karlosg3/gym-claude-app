@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -445,8 +446,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                 ),
                                 decoration: BoxDecoration(
                                   color: colors.surfaceSunken,
-                                  borderRadius:
-                                      BorderRadius.circular(GcRadii.sm + 2),
+                                  borderRadius: BorderRadius.circular(
+                                    GcRadii.sm + 2,
+                                  ),
                                   border: Border.all(color: colors.border),
                                 ),
                                 child: Text(
@@ -654,11 +656,7 @@ class _AccentColorOptionButton extends StatelessWidget {
                           : null,
                     ),
                     child: Center(
-                      child: Icon(
-                        GcIcons.exercises,
-                        size: 24,
-                        color: color,
-                      ),
+                      child: Icon(GcIcons.exercises, size: 24, color: color),
                     ),
                   ),
                   if (isSelected)
@@ -671,10 +669,7 @@ class _AccentColorOptionButton extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: color,
                           shape: BoxShape.circle,
-                          border: Border.all(
-                            color: colors.surface,
-                            width: 1.5,
-                          ),
+                          border: Border.all(color: colors.surface, width: 1.5),
                         ),
                         child: const Center(
                           child: Icon(

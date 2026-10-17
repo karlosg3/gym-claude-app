@@ -23,21 +23,18 @@ const List<SeedExerciseItem> initialExercises = [
   SeedExerciseItem(
     name: 'Press de banca',
     muscleGroup: MuscleGroup.chest,
-    description:
-        'Empuje horizontal básico. Mantén los omóplatos retraídos y baja la barra al pecho con control.',
+    description: 'Empuje horizontal básico. Mantén los omóplatos retraídos y baja la barra al pecho con control.',
   ),
   SeedExerciseItem(
     name: 'Press inclinado mancuerna',
     muscleGroup: MuscleGroup.chest,
-    description:
-        'Énfasis en la porción superior del pectoral. Banco a 30–45°.',
+    description: 'Énfasis en la porción superior del pectoral. Banco a 30–45°.',
   ),
   SeedExerciseItem(
     name: 'Fondos en paralelas',
     muscleGroup: MuscleGroup.chest,
     isBodyweight: true,
-    description:
-        'Inclina el torso al frente para cargar más pecho. Peso adicional con cinturón.',
+    description: 'Inclina el torso al frente para cargar más pecho. Peso adicional con cinturón.',
   ),
   SeedExerciseItem(
     name: 'Dominadas',
@@ -55,20 +52,17 @@ const List<SeedExerciseItem> initialExercises = [
   SeedExerciseItem(
     name: 'Sentadilla',
     muscleGroup: MuscleGroup.legs,
-    description:
-        'Profundidad por debajo de paralelo. Rodillas alineadas con la punta de los pies.',
+    description: 'Profundidad por debajo de paralelo. Rodillas alineadas con la punta de los pies.',
   ),
   SeedExerciseItem(
     name: 'Peso muerto',
     muscleGroup: MuscleGroup.legs,
-    description:
-        'Cadera y espalda en posición neutra. Empuja el suelo y bloquea arriba.',
+    description: 'Cadera y espalda en posición neutra. Empuja el suelo y bloquea arriba.',
   ),
   SeedExerciseItem(
     name: 'Press militar',
     muscleGroup: MuscleGroup.shoulders,
-    description:
-        'De pie, core firme. Empuja la barra por encima de la cabeza.',
+    description: 'De pie, core firme. Empuja la barra por encima de la cabeza.',
   ),
   SeedExerciseItem(
     name: 'Curl de bíceps',

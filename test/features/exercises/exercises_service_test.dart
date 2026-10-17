@@ -49,24 +49,30 @@ void main() {
       expect(names, contains('Dominadas'));
     });
 
-    test('filtra biblioteca por grupo muscular y texto con búsqueda sin acentos', () async {
-      final chestOnly = await service.watchLibrary(
-        const ExerciseFilter(group: MuscleGroup.chest),
-      ).first;
-      expect(chestOnly.length, 3);
-      expect(chestOnly.every((e) => e.muscleGroup == MuscleGroup.chest), true);
+    test(
+      'filtra biblioteca por grupo muscular y texto con búsqueda sin acentos',
+      () async {
+        final chestOnly = await service
+            .watchLibrary(const ExerciseFilter(group: MuscleGroup.chest))
+            .first;
+        expect(chestOnly.length, 3);
+        expect(
+          chestOnly.every((e) => e.muscleGroup == MuscleGroup.chest),
+          true,
+        );
 
-      final queryResult = await service.watchLibrary(
-        const ExerciseFilter(query: 'banca'),
-      ).first;
-      expect(queryResult.map((e) => e.name), ['Press de banca']);
+        final queryResult = await service
+            .watchLibrary(const ExerciseFilter(query: 'banca'))
+            .first;
+        expect(queryResult.map((e) => e.name), ['Press de banca']);
 
-      // Búsqueda sin acentos: 'biceps' encuentra 'Curl de bíceps'
-      final accentInsensitive = await service.watchLibrary(
-        const ExerciseFilter(query: 'biceps'),
-      ).first;
-      expect(accentInsensitive.map((e) => e.name), ['Curl de bíceps']);
-    });
+        // Búsqueda sin acentos: 'biceps' encuentra 'Curl de bíceps'
+        final accentInsensitive = await service
+            .watchLibrary(const ExerciseFilter(query: 'biceps'))
+            .first;
+        expect(accentInsensitive.map((e) => e.name), ['Curl de bíceps']);
+      },
+    );
 
     test('crea un nuevo ejercicio con borrador válido', () async {
       const draft = ExerciseDraft(
@@ -92,10 +98,7 @@ void main() {
         muscleGroup: MuscleGroup.arms,
         unit: WeightUnit.kg,
       );
-      expect(
-        () => service.create(emptyDraft),
-        throwsA(isA<DomainException>()),
-      );
+      expect(() => service.create(emptyDraft), throwsA(isA<DomainException>()));
 
       // Duplicado con distinta capitalización
       const duplicateCase = ExerciseDraft(
@@ -135,38 +138,41 @@ void main() {
       expect(found, isNull);
     });
 
-    test('borrar ejercicio con historial lo archiva y recrear lo restaura', () async {
-      const draft = ExerciseDraft(
-        name: 'Press Francés',
-        muscleGroup: MuscleGroup.arms,
-        unit: WeightUnit.kg,
-      );
-      final id = await service.create(draft);
-      exercisesWithHistory.add(id);
+    test(
+      'borrar ejercicio con historial lo archiva y recrear lo restaura',
+      () async {
+        const draft = ExerciseDraft(
+          name: 'Press Francés',
+          muscleGroup: MuscleGroup.arms,
+          unit: WeightUnit.kg,
+        );
+        final id = await service.create(draft);
+        exercisesWithHistory.add(id);
 
-      final outcome = await service.delete(id);
-      expect(outcome, DeleteOutcome.archived);
+        final outcome = await service.delete(id);
+        expect(outcome, DeleteOutcome.archived);
 
-      // Desaparece de la biblioteca activa
-      final activeList = await service.watchLibrary().first;
-      expect(activeList.any((e) => e.id == id), false);
+        // Desaparece de la biblioteca activa
+        final activeList = await service.watchLibrary().first;
+        expect(activeList.any((e) => e.id == id), false);
 
-      // Pero sigue existiendo archivado
-      final archived = await service.findById(id);
-      expect(archived, isNotNull);
-      expect(archived!.isArchived, true);
-      expect(archived.archivedAt, fixedClock.now());
+        // Pero sigue existiendo archivado
+        final archived = await service.findById(id);
+        expect(archived, isNotNull);
+        expect(archived!.isArchived, true);
+        expect(archived.archivedAt, fixedClock.now());
 
-      // Recrear un ejercicio con el mismo nombre restaura la fila existente
-      final restoredId = await service.create(
-        draft.copyWith(description: 'Versión restaurada'),
-      );
-      expect(restoredId, id);
+        // Recrear un ejercicio con el mismo nombre restaura la fila existente
+        final restoredId = await service.create(
+          draft.copyWith(description: 'Versión restaurada'),
+        );
+        expect(restoredId, id);
 
-      final restored = await service.findById(id);
-      expect(restored!.isArchived, false);
-      expect(restored.description, 'Versión restaurada');
-    });
+        final restored = await service.findById(id);
+        expect(restored!.isArchived, false);
+        expect(restored.description, 'Versión restaurada');
+      },
+    );
 
     test('actualiza unidad de peso del ejercicio', () async {
       final library = await service.watchLibrary().first;

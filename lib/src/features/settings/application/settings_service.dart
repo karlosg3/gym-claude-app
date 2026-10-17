@@ -64,9 +64,7 @@ class SettingsService {
   Future<void> setReminderMinutes(int minutes) async {
     final clamped = minutes.clamp(0, 1439);
     final current = await repository.getSettings();
-    await repository.updateSettings(
-      current.copyWith(reminderMinutes: clamped),
-    );
+    await repository.updateSettings(current.copyWith(reminderMinutes: clamped));
   }
 
   Future<void> setStreakRisk(bool enabled) async {
@@ -78,9 +76,7 @@ class SettingsService {
 
   Future<void> setRecords(bool enabled) async {
     final current = await repository.getSettings();
-    await repository.updateSettings(
-      current.copyWith(recordsEnabled: enabled),
-    );
+    await repository.updateSettings(current.copyWith(recordsEnabled: enabled));
   }
 
   /// Restablece todos los datos de la app a sus valores por defecto dentro de una

@@ -64,10 +64,7 @@ class DriftExercisesRepository implements ExercisesRepository {
 
   @override
   Future<void> updateUnit(int id, WeightUnit unit) async {
-    await _dao.updateExerciseRow(
-      id,
-      ExercisesCompanion(unit: Value(unit)),
-    );
+    await _dao.updateExerciseRow(id, ExercisesCompanion(unit: Value(unit)));
   }
 
   @override

@@ -15,7 +15,11 @@ class ExerciseDetailScreen extends ConsumerWidget {
 
   final int exerciseId;
 
-  Future<void> _confirmDelete(BuildContext context, WidgetRef ref, Exercise exercise) async {
+  Future<void> _confirmDelete(
+    BuildContext context,
+    WidgetRef ref,
+    Exercise exercise,
+  ) async {
     final l10n = context.l10n;
     final confirmed = await showDialog<bool>(
       context: context,
@@ -57,9 +61,9 @@ class ExerciseDetailScreen extends ConsumerWidget {
       if (context.mounted && outcome != null) {
         context.pop();
         if (outcome == DeleteOutcome.archived) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.exerciseArchiveMessage)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(l10n.exerciseArchiveMessage)));
         }
       }
     }
@@ -103,10 +107,8 @@ class ExerciseDetailScreen extends ConsumerWidget {
             IconSquareButton(
               icon: GcIcons.export,
               semanticLabel: l10n.navExport,
-              onPressed: () => context.pushExport(
-                scope: 'exercises',
-                ids: [exercise.id],
-              ),
+              onPressed: () =>
+                  context.pushExport(scope: 'exercises', ids: [exercise.id]),
             ),
             const SizedBox(width: GcSpacing.sm),
             IconSquareButton(
@@ -299,9 +301,8 @@ class ExerciseDetailScreen extends ConsumerWidget {
           ),
         );
       },
-      loading: () => const GcScaffold(
-        body: Center(child: CircularProgressIndicator()),
-      ),
+      loading: () =>
+          const GcScaffold(body: Center(child: CircularProgressIndicator())),
       error: (err, _) => GcScaffold(
         body: Center(
           child: Text(
@@ -315,10 +316,7 @@ class ExerciseDetailScreen extends ConsumerWidget {
 }
 
 class _DetailStatCard extends StatelessWidget {
-  const _DetailStatCard({
-    required this.value,
-    required this.label,
-  });
+  const _DetailStatCard({required this.value, required this.label});
 
   final String value;
   final String label;

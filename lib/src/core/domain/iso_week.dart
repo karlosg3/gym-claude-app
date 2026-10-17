@@ -10,10 +10,8 @@ part 'iso_week.freezed.dart';
 abstract class IsoWeek with _$IsoWeek implements Comparable<IsoWeek> {
   const IsoWeek._();
 
-  const factory IsoWeek({
-    required int weekYear,
-    required int weekNumber,
-  }) = _IsoWeek;
+  const factory IsoWeek({required int weekYear, required int weekNumber}) =
+      _IsoWeek;
 
   /// Calcula la semana ISO correspondiente a una fecha.
   factory IsoWeek.of(LocalDate date) {

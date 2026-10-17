@@ -51,11 +51,7 @@ class AsyncValueView<T> extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  GcIcons.alert,
-                  size: 28,
-                  color: c.error,
-                ),
+                Icon(GcIcons.alert, size: 28, color: c.error),
                 const SizedBox(height: GcSpacing.md),
                 if (errorTitle != null) ...[
                   Text(

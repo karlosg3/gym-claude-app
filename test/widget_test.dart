@@ -22,9 +22,7 @@ void main() {
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [
-            appDatabaseProvider.overrideWithValue(db),
-          ],
+          overrides: [appDatabaseProvider.overrideWithValue(db)],
           child: const GymClaudeApp(),
         ),
       );

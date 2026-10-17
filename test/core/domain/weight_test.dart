@@ -19,10 +19,7 @@ void main() {
     });
 
     test('Weight.fromInput rechaza pesos negativos', () {
-      expect(
-        () => Weight.fromInput(-5.0, WeightUnit.kg),
-        throwsArgumentError,
-      );
+      expect(() => Weight.fromInput(-5.0, WeightUnit.kg), throwsArgumentError);
     });
 
     test('inUnit devuelve valor exacto sin redondear', () {

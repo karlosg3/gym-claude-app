@@ -14,7 +14,10 @@ void main() {
     });
 
     test('formatea en kg con coma decimal y sin .0 superfluo', () {
-      expect(WeightFormatter.format(const Weight.kg(80), WeightUnit.kg), '80 kg');
+      expect(
+        WeightFormatter.format(const Weight.kg(80), WeightUnit.kg),
+        '80 kg',
+      );
       expect(
         WeightFormatter.format(const Weight.kg(72.5), WeightUnit.kg),
         '72,5 kg',
@@ -23,11 +26,7 @@ void main() {
 
     test('formatea peso corporal 0 y lastre positivo', () {
       expect(
-        WeightFormatter.format(
-          Weight.zero,
-          WeightUnit.kg,
-          isBodyweight: true,
-        ),
+        WeightFormatter.format(Weight.zero, WeightUnit.kg, isBodyweight: true),
         'Peso corporal',
       );
       expect(
@@ -76,9 +75,14 @@ void main() {
     });
 
     test('redondea minutos de sesión con mínimo de 1 minuto', () {
-      expect(DurationFormatter.minutesLabel(const Duration(seconds: 12)), '1 min');
       expect(
-        DurationFormatter.minutesLabel(const Duration(minutes: 49, seconds: 40)),
+        DurationFormatter.minutesLabel(const Duration(seconds: 12)),
+        '1 min',
+      );
+      expect(
+        DurationFormatter.minutesLabel(
+          const Duration(minutes: 49, seconds: 40),
+        ),
         '50 min',
       );
     });

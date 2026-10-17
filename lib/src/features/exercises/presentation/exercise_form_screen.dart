@@ -107,7 +107,9 @@ class _ExerciseFormScreenState extends ConsumerState<ExerciseFormScreen> {
     }
 
     if (widget.isEditing && !_initialLoaded) {
-      final exerciseAsync = ref.watch(exerciseDetailProvider(widget.exerciseId!));
+      final exerciseAsync = ref.watch(
+        exerciseDetailProvider(widget.exerciseId!),
+      );
       exerciseAsync.whenData((ex) {
         if (ex != null && !_initialLoaded) {
           _nameController.text = ex.name;
@@ -259,9 +261,7 @@ class _ExerciseFormScreenState extends ConsumerState<ExerciseFormScreen> {
                       child: Container(
                         padding: const EdgeInsets.all(GcSpacing.md),
                         decoration: BoxDecoration(
-                          color: _unit == unit
-                              ? colors.accent
-                              : colors.surface,
+                          color: _unit == unit ? colors.accent : colors.surface,
                           borderRadius: BorderRadius.circular(GcRadii.md),
                           border: Border.all(
                             color: _unit == unit
@@ -349,10 +349,7 @@ class _ExerciseFormScreenState extends ConsumerState<ExerciseFormScreen> {
           const SizedBox(height: GcSpacing.xxl),
 
           // BOTONES
-          PrimaryButton(
-            label: l10n.exerciseFormSave,
-            onPressed: _submit,
-          ),
+          PrimaryButton(label: l10n.exerciseFormSave, onPressed: _submit),
           const SizedBox(height: GcSpacing.sm),
           SecondaryButton(
             label: l10n.exerciseFormCancel,

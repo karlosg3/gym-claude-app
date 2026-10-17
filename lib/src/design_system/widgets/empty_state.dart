@@ -41,18 +41,10 @@ class EmptyState extends StatelessWidget {
                 borderRadius: GcRadii.borderXl,
                 border: Border.all(color: c.border),
               ),
-              child: Icon(
-                icon,
-                size: 24,
-                color: c.textSecondary,
-              ),
+              child: Icon(icon, size: 24, color: c.textSecondary),
             ),
             const SizedBox(height: GcSpacing.lg),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: t.subtitle,
-            ),
+            Text(title, textAlign: TextAlign.center, style: t.subtitle),
             const SizedBox(height: GcSpacing.sm),
             Text(
               description,

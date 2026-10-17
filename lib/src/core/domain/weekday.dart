@@ -20,7 +20,8 @@ enum Weekday {
   static Weekday fromIso(int iso) {
     return Weekday.values.firstWhere(
       (w) => w.isoValue == iso,
-      orElse: () => throw ArgumentError('Valor ISO de día de la semana inválido: $iso'),
+      orElse: () =>
+          throw ArgumentError('Valor ISO de día de la semana inválido: $iso'),
     );
   }
 

@@ -42,12 +42,7 @@ abstract interface class RoutinesRepository {
   Future<void> removeItem(int itemId);
 
   /// Reordena los ejercicios de un día específico compactando sus posiciones contiguas.
-  Future<void> reorder(
-    int routineId,
-    Weekday day,
-    int oldIndex,
-    int newIndex,
-  );
+  Future<void> reorder(int routineId, Weekday day, int oldIndex, int newIndex);
 
   /// Modifica el esquema de series y repeticiones de un item de rutina.
   Future<void> setScheme(int itemId, RepScheme scheme);

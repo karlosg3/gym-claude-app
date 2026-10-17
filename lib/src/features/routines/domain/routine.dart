@@ -102,14 +102,14 @@ class Routine {
 
   @override
   int get hashCode => Object.hash(
-        id,
-        name,
-        description,
-        Object.hashAll(activeDays),
-        Object.hashAll(items),
-        sortOrder,
-        createdAt,
-      );
+    id,
+    name,
+    description,
+    Object.hashAll(activeDays),
+    Object.hashAll(items),
+    sortOrder,
+    createdAt,
+  );
 
   @override
   String toString() =>

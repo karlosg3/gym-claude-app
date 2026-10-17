@@ -48,10 +48,7 @@ class _RepSchemeBottomSheetState extends State<RepSchemeBottomSheet> {
   }
 
   void _onSave() {
-    final scheme = RepScheme(
-      sets: _sets,
-      reps: _isMax ? null : _reps,
-    );
+    final scheme = RepScheme(sets: _sets, reps: _isMax ? null : _reps);
     Navigator.of(context).pop(scheme);
   }
 
@@ -67,9 +64,7 @@ class _RepSchemeBottomSheetState extends State<RepSchemeBottomSheet> {
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(GcRadii.xxl),
         ),
-        border: Border(
-          top: BorderSide(color: colors.border),
-        ),
+        border: Border(top: BorderSide(color: colors.border)),
       ),
       padding: EdgeInsets.fromLTRB(
         GcSpacing.screenHorizontal,
@@ -107,10 +102,7 @@ class _RepSchemeBottomSheetState extends State<RepSchemeBottomSheet> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                l10n.routineSetsLabel,
-                style: text.bodyStrong,
-              ),
+              Text(l10n.routineSetsLabel, style: text.bodyStrong),
               GcStepper(
                 value: _sets,
                 min: 1,
@@ -146,10 +138,7 @@ class _RepSchemeBottomSheetState extends State<RepSchemeBottomSheet> {
             onChanged: (val) => setState(() => _isMax = val),
           ),
           const SizedBox(height: GcSpacing.xl),
-          PrimaryButton(
-            label: l10n.commonSave,
-            onPressed: _onSave,
-          ),
+          PrimaryButton(label: l10n.commonSave, onPressed: _onSave),
         ],
       ),
     );

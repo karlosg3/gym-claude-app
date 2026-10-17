@@ -67,11 +67,7 @@ class _BootstrapErrorView extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  GcIcons.alert,
-                  size: GcIcons.sizeLg,
-                  color: colors.danger,
-                ),
+                Icon(GcIcons.alert, size: GcIcons.sizeLg, color: colors.danger),
                 const SizedBox(height: GcSpacing.md),
                 Text(
                   title,

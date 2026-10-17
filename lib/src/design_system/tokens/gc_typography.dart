@@ -18,10 +18,7 @@ class GcTextStyles {
   });
 
   factory GcTextStyles.fromColors(GcColors colors) {
-    const base = TextStyle(
-      fontFamily: fontFamily,
-      height: 1.25,
-    );
+    const base = TextStyle(fontFamily: fontFamily, height: 1.25);
     return GcTextStyles._(
       display: base.copyWith(
         fontSize: 26,
@@ -132,7 +129,6 @@ class GcTextStyles {
 
 /// Extensión para activar cifras tabulares en cualquier estilo tipográfico.
 extension GcTabularTextStyle on TextStyle {
-  TextStyle get tabular => copyWith(
-        fontFeatures: const [FontFeature.tabularFigures()],
-      );
+  TextStyle get tabular =>
+      copyWith(fontFeatures: const [FontFeature.tabularFigures()]);
 }

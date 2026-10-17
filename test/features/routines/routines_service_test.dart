@@ -26,10 +26,15 @@ void main() {
 
     // Obtener ejercicios ya sembrados por AppDatabase.onCreate
     final seeded = await exercisesRepo.watchLibrary().first;
-    exercise1Id =
-        seeded.firstWhere((e) => e.muscleGroup == MuscleGroup.shoulders).id;
-    exercise2Id = seeded.firstWhere((e) => e.muscleGroup == MuscleGroup.back).id;
-    exercise3Id = seeded.firstWhere((e) => e.muscleGroup == MuscleGroup.legs).id;
+    exercise1Id = seeded
+        .firstWhere((e) => e.muscleGroup == MuscleGroup.shoulders)
+        .id;
+    exercise2Id = seeded
+        .firstWhere((e) => e.muscleGroup == MuscleGroup.back)
+        .id;
+    exercise3Id = seeded
+        .firstWhere((e) => e.muscleGroup == MuscleGroup.legs)
+        .id;
 
     repository = DriftRoutinesRepository(db.routinesDao);
     service = RoutinesService(repository);
@@ -72,10 +77,7 @@ void main() {
       // Nombre vacío
       expect(
         () => service.create(
-          const RoutineDraft(
-            name: '   ',
-            activeDays: {Weekday.monday},
-          ),
+          const RoutineDraft(name: '   ', activeDays: {Weekday.monday}),
         ),
         throwsA(isA<EmptyNameException>()),
       );
@@ -83,10 +85,7 @@ void main() {
       // Nombre demasiado largo (> 60 caracteres)
       expect(
         () => service.create(
-          RoutineDraft(
-            name: 'A' * 65,
-            activeDays: const {Weekday.monday},
-          ),
+          RoutineDraft(name: 'A' * 65, activeDays: const {Weekday.monday}),
         ),
         throwsA(isA<DomainException>()),
       );
@@ -94,75 +93,68 @@ void main() {
       // Sin días activos
       expect(
         () => service.create(
-          const RoutineDraft(
-            name: 'Sin días',
-            activeDays: {},
-          ),
+          const RoutineDraft(name: 'Sin días', activeDays: {}),
         ),
         throwsA(isA<RoutineWithoutDaysException>()),
       );
     });
 
-    test('asigna ejercicios a un día y evita duplicados en el mismo día', () async {
-      final routineId = await service.create(
-        const RoutineDraft(
-          name: 'Empuje',
-          activeDays: {Weekday.monday, Weekday.thursday},
-        ),
-      );
+    test(
+      'asigna ejercicios a un día y evita duplicados en el mismo día',
+      () async {
+        final routineId = await service.create(
+          const RoutineDraft(
+            name: 'Empuje',
+            activeDays: {Weekday.monday, Weekday.thursday},
+          ),
+        );
 
-      // Agregar ejercicio 1 en Lunes
-      final item1Id = await service.addExercise(
-        routineId,
-        Weekday.monday,
-        exercise1Id,
-        const RepScheme(sets: 4, reps: 8),
-      );
-      expect(item1Id, isPositive);
-
-      // Agregar ejercicio 2 en Lunes
-      final item2Id = await service.addExercise(
-        routineId,
-        Weekday.monday,
-        exercise2Id,
-        const RepScheme(sets: 3), // al fallo
-      );
-      expect(item2Id, isPositive);
-
-      final routine = await service.findById(routineId);
-      final mondayItems = routine!.itemsFor(Weekday.monday);
-      expect(mondayItems.length, 2);
-      expect(mondayItems[0].exercise.id, exercise1Id);
-      expect(mondayItems[0].scheme.label, '4 × 8');
-      expect(mondayItems[1].exercise.id, exercise2Id);
-      expect(mondayItems[1].scheme.isMax, true);
-      expect(mondayItems[1].scheme.label, '3 × máx');
-
-      // Intento de volver a agregar ejercicio 1 el mismo día lanza excepción
-      expect(
-        () => service.addExercise(
+        // Agregar ejercicio 1 en Lunes
+        final item1Id = await service.addExercise(
           routineId,
           Weekday.monday,
           exercise1Id,
-        ),
-        throwsA(isA<ExerciseAlreadyInDayException>()),
-      );
+          const RepScheme(sets: 4, reps: 8),
+        );
+        expect(item1Id, isPositive);
 
-      // Pero sí se permite agregar ejercicio 1 en otro día (Jueves)
-      final thursdayItemId = await service.addExercise(
-        routineId,
-        Weekday.thursday,
-        exercise1Id,
-      );
-      expect(thursdayItemId, isPositive);
-    });
+        // Agregar ejercicio 2 en Lunes
+        final item2Id = await service.addExercise(
+          routineId,
+          Weekday.monday,
+          exercise2Id,
+          const RepScheme(sets: 3), // al fallo
+        );
+        expect(item2Id, isPositive);
+
+        final routine = await service.findById(routineId);
+        final mondayItems = routine!.itemsFor(Weekday.monday);
+        expect(mondayItems.length, 2);
+        expect(mondayItems[0].exercise.id, exercise1Id);
+        expect(mondayItems[0].scheme.label, '4 × 8');
+        expect(mondayItems[1].exercise.id, exercise2Id);
+        expect(mondayItems[1].scheme.isMax, true);
+        expect(mondayItems[1].scheme.label, '3 × máx');
+
+        // Intento de volver a agregar ejercicio 1 el mismo día lanza excepción
+        expect(
+          () => service.addExercise(routineId, Weekday.monday, exercise1Id),
+          throwsA(isA<ExerciseAlreadyInDayException>()),
+        );
+
+        // Pero sí se permite agregar ejercicio 1 en otro día (Jueves)
+        final thursdayItemId = await service.addExercise(
+          routineId,
+          Weekday.thursday,
+          exercise1Id,
+        );
+        expect(thursdayItemId, isPositive);
+      },
+    );
 
     test('reordena ejercicios dentro de un día de la rutina', () async {
       final routineId = await service.create(
-        const RoutineDraft(
-          name: 'Full Body',
-          activeDays: {Weekday.wednesday},
-        ),
+        const RoutineDraft(name: 'Full Body', activeDays: {Weekday.wednesday}),
       );
 
       await service.addExercise(routineId, Weekday.wednesday, exercise1Id);
@@ -191,10 +183,7 @@ void main() {
 
     test('actualiza el esquema de series y repeticiones', () async {
       final routineId = await service.create(
-        const RoutineDraft(
-          name: 'Rutina',
-          activeDays: {Weekday.friday},
-        ),
+        const RoutineDraft(name: 'Rutina', activeDays: {Weekday.friday}),
       );
       final itemId = await service.addExercise(
         routineId,
@@ -220,10 +209,7 @@ void main() {
 
     test('eliminar ejercicio puntual de la rutina', () async {
       final routineId = await service.create(
-        const RoutineDraft(
-          name: 'Rutina',
-          activeDays: {Weekday.monday},
-        ),
+        const RoutineDraft(name: 'Rutina', activeDays: {Weekday.monday}),
       );
       final itemId = await service.addExercise(
         routineId,
@@ -237,39 +223,36 @@ void main() {
       expect(routine!.itemsFor(Weekday.monday), isEmpty);
     });
 
-    test('actualizar rutina y deseleccionar un día purga sus ejercicios asignados', () async {
-      final routineId = await service.create(
-        const RoutineDraft(
-          name: 'Original',
-          activeDays: {Weekday.monday, Weekday.wednesday},
-        ),
-      );
+    test(
+      'actualizar rutina y deseleccionar un día purga sus ejercicios asignados',
+      () async {
+        final routineId = await service.create(
+          const RoutineDraft(
+            name: 'Original',
+            activeDays: {Weekday.monday, Weekday.wednesday},
+          ),
+        );
 
-      await service.addExercise(routineId, Weekday.monday, exercise1Id);
-      await service.addExercise(routineId, Weekday.wednesday, exercise2Id);
+        await service.addExercise(routineId, Weekday.monday, exercise1Id);
+        await service.addExercise(routineId, Weekday.wednesday, exercise2Id);
 
-      // Actualizar quitando el Miércoles
-      await service.update(
-        routineId,
-        const RoutineDraft(
-          name: 'Solo Lunes',
-          activeDays: {Weekday.monday},
-        ),
-      );
+        // Actualizar quitando el Miércoles
+        await service.update(
+          routineId,
+          const RoutineDraft(name: 'Solo Lunes', activeDays: {Weekday.monday}),
+        );
 
-      final updated = await service.findById(routineId);
-      expect(updated!.name, 'Solo Lunes');
-      expect(updated.activeDays, {Weekday.monday});
-      expect(updated.itemsFor(Weekday.monday).length, 1);
-      expect(updated.itemsFor(Weekday.wednesday), isEmpty);
-    });
+        final updated = await service.findById(routineId);
+        expect(updated!.name, 'Solo Lunes');
+        expect(updated.activeDays, {Weekday.monday});
+        expect(updated.itemsFor(Weekday.monday).length, 1);
+        expect(updated.itemsFor(Weekday.wednesday), isEmpty);
+      },
+    );
 
     test('eliminar rutina borra en cascada sus items', () async {
       final routineId = await service.create(
-        const RoutineDraft(
-          name: 'A eliminar',
-          activeDays: {Weekday.tuesday},
-        ),
+        const RoutineDraft(name: 'A eliminar', activeDays: {Weekday.tuesday}),
       );
       await service.addExercise(routineId, Weekday.tuesday, exercise1Id);
 
@@ -282,59 +265,67 @@ void main() {
       expect(all.any((r) => r.id == routineId), false);
     });
 
-    test('calcula accentGroup según el grupo muscular con más ejercicios', () async {
-      final routineId = await service.create(
-        const RoutineDraft(
-          name: 'Accent Test',
-          activeDays: {Weekday.monday, Weekday.tuesday},
-        ),
-      );
+    test(
+      'calcula accentGroup según el grupo muscular con más ejercicios',
+      () async {
+        final routineId = await service.create(
+          const RoutineDraft(
+            name: 'Accent Test',
+            activeDays: {Weekday.monday, Weekday.tuesday},
+          ),
+        );
 
-      // Exercise1 = shoulders, Exercise2 = back
-      await service.addExercise(routineId, Weekday.monday, exercise1Id);
-      var routine = await service.findById(routineId);
-      expect(routine!.accentGroup, MuscleGroup.shoulders);
+        // Exercise1 = shoulders, Exercise2 = back
+        await service.addExercise(routineId, Weekday.monday, exercise1Id);
+        var routine = await service.findById(routineId);
+        expect(routine!.accentGroup, MuscleGroup.shoulders);
 
-      await service.addExercise(routineId, Weekday.tuesday, exercise2Id);
-      // Desempate: primer orden de aparición (shoulders)
-      routine = await service.findById(routineId);
-      expect(routine!.accentGroup, MuscleGroup.shoulders);
+        await service.addExercise(routineId, Weekday.tuesday, exercise2Id);
+        // Desempate: primer orden de aparición (shoulders)
+        routine = await service.findById(routineId);
+        expect(routine!.accentGroup, MuscleGroup.shoulders);
 
-      // Otro ejercicio de back
-      final allExercises =
-          await DriftExercisesRepository(ExercisesDao(db)).watchLibrary().first;
-      final exercise4Id = allExercises
-          .firstWhere(
-              (e) => e.muscleGroup == MuscleGroup.back && e.id != exercise2Id)
-          .id;
-      await service.addExercise(routineId, Weekday.monday, exercise4Id);
+        // Otro ejercicio de back
+        final allExercises = await DriftExercisesRepository(ExercisesDao(db))
+            .watchLibrary()
+            .first;
+        final exercise4Id = allExercises
+            .firstWhere(
+              (e) => e.muscleGroup == MuscleGroup.back && e.id != exercise2Id,
+            )
+            .id;
+        await service.addExercise(routineId, Weekday.monday, exercise4Id);
 
-      routine = await service.findById(routineId);
-      // Ahora back tiene 2, shoulders tiene 1 -> accentGroup = back
-      expect(routine!.accentGroup, MuscleGroup.back);
-    });
+        routine = await service.findById(routineId);
+        // Ahora back tiene 2, shoulders tiene 1 -> accentGroup = back
+        expect(routine!.accentGroup, MuscleGroup.back);
+      },
+    );
 
-    test('watchPlannedWeekdays emite conjunto de días con ejercicios asignados', () async {
-      final routineId = await service.create(
-        const RoutineDraft(
-          name: 'Plan',
-          activeDays: {Weekday.monday, Weekday.friday},
-        ),
-      );
+    test(
+      'watchPlannedWeekdays emite conjunto de días con ejercicios asignados',
+      () async {
+        final routineId = await service.create(
+          const RoutineDraft(
+            name: 'Plan',
+            activeDays: {Weekday.monday, Weekday.friday},
+          ),
+        );
 
-      // Al inicio, no hay ejercicios asignados en ningún día
-      var planned = await service.watchPlannedWeekdays().first;
-      expect(planned, isEmpty);
+        // Al inicio, no hay ejercicios asignados en ningún día
+        var planned = await service.watchPlannedWeekdays().first;
+        expect(planned, isEmpty);
 
-      // Asignar ejercicio solo al Lunes
-      await service.addExercise(routineId, Weekday.monday, exercise1Id);
-      planned = await service.watchPlannedWeekdays().first;
-      expect(planned, {Weekday.monday});
+        // Asignar ejercicio solo al Lunes
+        await service.addExercise(routineId, Weekday.monday, exercise1Id);
+        planned = await service.watchPlannedWeekdays().first;
+        expect(planned, {Weekday.monday});
 
-      // Asignar ejercicio al Viernes
-      await service.addExercise(routineId, Weekday.friday, exercise2Id);
-      planned = await service.watchPlannedWeekdays().first;
-      expect(planned, {Weekday.monday, Weekday.friday});
-    });
+        // Asignar ejercicio al Viernes
+        await service.addExercise(routineId, Weekday.friday, exercise2Id);
+        planned = await service.watchPlannedWeekdays().first;
+        expect(planned, {Weekday.monday, Weekday.friday});
+      },
+    );
   });
 }

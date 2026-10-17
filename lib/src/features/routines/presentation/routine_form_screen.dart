@@ -23,7 +23,11 @@ class _RoutineFormScreenState extends ConsumerState<RoutineFormScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
-  Set<Weekday> _activeDays = {Weekday.monday, Weekday.wednesday, Weekday.friday};
+  Set<Weekday> _activeDays = {
+    Weekday.monday,
+    Weekday.wednesday,
+    Weekday.friday,
+  };
   bool _initialized = false;
   Routine? _existingRoutine;
   String? _errorMessage;
@@ -69,7 +73,9 @@ class _RoutineFormScreenState extends ConsumerState<RoutineFormScreen> {
       return;
     }
     if (name.length > 60) {
-      setState(() => _nameError = 'El nombre no puede superar los 60 caracteres');
+      setState(
+        () => _nameError = 'El nombre no puede superar los 60 caracteres',
+      );
       return;
     }
     if (_activeDays.isEmpty) {
@@ -85,7 +91,9 @@ class _RoutineFormScreenState extends ConsumerState<RoutineFormScreen> {
 
     try {
       if (widget.routineId != null) {
-        await ref.read(routinesServiceProvider).update(widget.routineId!, draft);
+        await ref
+            .read(routinesServiceProvider)
+            .update(widget.routineId!, draft);
         if (mounted) {
           Navigator.of(context).pop();
         }
@@ -119,9 +127,8 @@ class _RoutineFormScreenState extends ConsumerState<RoutineFormScreen> {
           }
           return _buildForm(context, l10n, colors, textStyles);
         },
-        loading: () => const GcScaffold(
-          body: Center(child: CircularProgressIndicator()),
-        ),
+        loading: () =>
+            const GcScaffold(body: Center(child: CircularProgressIndicator())),
         error: (err, _) => GcScaffold(
           body: Center(
             child: Text(
@@ -146,7 +153,8 @@ class _RoutineFormScreenState extends ConsumerState<RoutineFormScreen> {
     final title = isEditing ? l10n.routineEditTitle : l10n.routineNewTitle;
 
     // Calcular si hay ejercicios que se perderán al desactivar días
-    final removedExercisesCount = _existingRoutine?.items
+    final removedExercisesCount =
+        _existingRoutine?.items
             .where((item) => !_activeDays.contains(item.weekday))
             .length ??
         0;
@@ -170,7 +178,9 @@ class _RoutineFormScreenState extends ConsumerState<RoutineFormScreen> {
                 decoration: BoxDecoration(
                   color: colors.danger.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(GcRadii.md),
-                  border: Border.all(color: colors.danger.withValues(alpha: 0.4)),
+                  border: Border.all(
+                    color: colors.danger.withValues(alpha: 0.4),
+                  ),
                 ),
                 child: Text(
                   _errorMessage!,
@@ -215,7 +225,9 @@ class _RoutineFormScreenState extends ConsumerState<RoutineFormScreen> {
                 decoration: BoxDecoration(
                   color: colors.error.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(GcRadii.md),
-                  border: Border.all(color: colors.error.withValues(alpha: 0.4)),
+                  border: Border.all(
+                    color: colors.error.withValues(alpha: 0.4),
+                  ),
                 ),
                 child: Row(
                   children: [
@@ -243,10 +255,7 @@ class _RoutineFormScreenState extends ConsumerState<RoutineFormScreen> {
             const SizedBox(height: GcSpacing.xxl),
 
             // Botón Guardar
-            PrimaryButton(
-              label: l10n.routineSaveButton,
-              onPressed: _save,
-            ),
+            PrimaryButton(label: l10n.routineSaveButton, onPressed: _save),
           ],
         ),
       ),

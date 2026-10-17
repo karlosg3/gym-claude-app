@@ -51,10 +51,12 @@ void main() {
         ProviderScope(
           overrides: [
             exercisesServiceProvider.overrideWithValue(mockService),
-            exerciseLibraryProvider
-                .overrideWith((ref) => Stream.value(sampleExercises)),
-            exerciseCountProvider
-                .overrideWith((ref) => Stream.value(sampleExercises.length)),
+            exerciseLibraryProvider.overrideWith(
+              (ref) => Stream.value(sampleExercises),
+            ),
+            exerciseCountProvider.overrideWith(
+              (ref) => Stream.value(sampleExercises.length),
+            ),
           ],
           child: const MaterialApp(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -122,9 +124,7 @@ void main() {
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [
-            exercisesServiceProvider.overrideWithValue(mockService),
-          ],
+          overrides: [exercisesServiceProvider.overrideWithValue(mockService)],
           child: const MaterialApp(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,

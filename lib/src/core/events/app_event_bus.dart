@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:gym_claude/src/core/events/app_event.dart';
 
@@ -7,7 +8,8 @@ part 'app_event_bus.g.dart';
 /// Bus de eventos de la aplicación para desacoplar productores de momentos
 /// (servicios) de consumidores reactivos (animaciones, integraciones).
 class AppEventBus {
-  final StreamController<AppEvent> _controller = StreamController<AppEvent>.broadcast();
+  final StreamController<AppEvent> _controller =
+      StreamController<AppEvent>.broadcast();
 
   /// Flujo global de eventos.
   Stream<AppEvent> get stream => _controller.stream;

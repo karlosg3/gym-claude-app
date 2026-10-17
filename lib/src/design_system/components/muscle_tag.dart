@@ -8,11 +8,7 @@ import 'package:gym_claude/src/l10n/l10n.dart';
 
 /// Etiqueta semántica de grupo muscular con paleta propia según el diseño.
 class MuscleTag extends StatelessWidget {
-  const MuscleTag({
-    required this.group,
-    this.labelOverride,
-    super.key,
-  });
+  const MuscleTag({required this.group, this.labelOverride, super.key});
 
   final MuscleGroup group;
   final String? labelOverride;

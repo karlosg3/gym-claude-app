@@ -8,15 +8,18 @@ part 'date_range.freezed.dart';
 abstract class DateRange with _$DateRange {
   const DateRange._();
 
-  const factory DateRange({
-    required LocalDate start,
-    required LocalDate end,
-  }) = _DateRange;
+  const factory DateRange({required LocalDate start, required LocalDate end}) =
+      _DateRange;
 
   /// Valida que el inicio no sea posterior al final.
-  factory DateRange.checked({required LocalDate start, required LocalDate end}) {
+  factory DateRange.checked({
+    required LocalDate start,
+    required LocalDate end,
+  }) {
     if (start.isAfter(end)) {
-      throw ArgumentError('La fecha de inicio ($start) no puede ser posterior a la de fin ($end)');
+      throw ArgumentError(
+        'La fecha de inicio ($start) no puede ser posterior a la de fin ($end)',
+      );
     }
     return DateRange(start: start, end: end);
   }

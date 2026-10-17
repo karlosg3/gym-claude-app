@@ -195,7 +195,9 @@ class DangerButton extends StatelessWidget {
         color: c.surfaceSunken,
         shape: RoundedRectangleBorder(
           borderRadius: GcRadii.borderLg,
-          side: BorderSide(color: enabled ? c.danger.withValues(alpha: 0.4) : c.border),
+          side: BorderSide(
+            color: enabled ? c.danger.withValues(alpha: 0.4) : c.border,
+          ),
         ),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
@@ -244,7 +246,7 @@ class IconSquareButton extends StatelessWidget {
   const IconSquareButton({
     required this.icon,
     required this.onPressed,
-    required this. semanticLabel,
+    required this.semanticLabel,
     super.key,
     this.color,
   });
@@ -280,11 +282,7 @@ class IconSquareButton extends StatelessWidget {
                   borderRadius: GcRadii.borderMd,
                   border: Border.all(color: c.border),
                 ),
-                child: Icon(
-                  icon,
-                  size: 18,
-                  color: color ?? c.textPrimary,
-                ),
+                child: Icon(icon, size: 18, color: color ?? c.textPrimary),
               ),
             ),
           ),

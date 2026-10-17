@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gym_claude/src/design_system/design_system.dart';
@@ -54,9 +55,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
                 child: Center(
                   heightFactor: 1.0,
                   child: ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      maxWidth: 340,
-                    ),
+                    constraints: const BoxConstraints(maxWidth: 340),
                     child: DecoratedBox(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(18),
@@ -86,8 +85,10 @@ class ScaffoldWithNavBar extends StatelessWidget {
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                                 colors: [
-                                  const Color(0xFF2E2822).withValues(alpha: 0.15),
-                                  const Color(0xFF161310).withValues(alpha: 0.25),
+                                  const Color(0xFF2E2822)
+                                      .withValues(alpha: 0.15),
+                                  const Color(0xFF161310)
+                                      .withValues(alpha: 0.25),
                                 ],
                               ),
                               border: Border.all(
@@ -101,7 +102,8 @@ class ScaffoldWithNavBar extends StatelessWidget {
                                   Expanded(
                                     child: _NavTabButton(
                                       item: items[i],
-                                      selected: i == navigationShell.currentIndex,
+                                      selected:
+                                          i == navigationShell.currentIndex,
                                       activeColor: colors.accent,
                                       inactiveColor: colors.textMuted,
                                       labelStyle: text.micro,
@@ -165,10 +167,7 @@ class _NavTabButton extends StatelessWidget {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             curve: Curves.easeOutCubic,
-            padding: const EdgeInsets.symmetric(
-              vertical: 6,
-              horizontal: 4,
-            ),
+            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: selected
@@ -185,11 +184,7 @@ class _NavTabButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  item.icon,
-                  size: GcIcons.sizeMd,
-                  color: color,
-                ),
+                Icon(item.icon, size: GcIcons.sizeMd, color: color),
                 const SizedBox(height: 2),
                 Text(
                   item.label,

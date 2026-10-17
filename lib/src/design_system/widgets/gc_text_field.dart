@@ -92,10 +92,7 @@ class GcTextField extends StatelessWidget {
         ),
         if (hasError) ...[
           const SizedBox(height: GcSpacing.xs + 2),
-          Text(
-            errorText!,
-            style: t.caption.copyWith(color: c.error),
-          ),
+          Text(errorText!, style: t.caption.copyWith(color: c.error)),
         ],
       ],
     );

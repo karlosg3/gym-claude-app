@@ -22,10 +22,7 @@ class ExercisesListScreen extends ConsumerWidget {
     final countAsync = ref.watch(exerciseCountProvider);
 
     final filterItems = [
-      FilterChipItem<MuscleGroup?>(
-        value: null,
-        label: l10n.exercisesFilterAll,
-      ),
+      FilterChipItem<MuscleGroup?>(value: null, label: l10n.exercisesFilterAll),
       for (final g in MuscleGroup.values)
         FilterChipItem<MuscleGroup?>(
           value: g,
@@ -40,9 +37,7 @@ class ExercisesListScreen extends ConsumerWidget {
           child: countAsync.when(
             data: (count) => Text(
               l10n.exercisesCount(count),
-              style: textStyles.label.copyWith(
-                color: colors.textMuted,
-              ),
+              style: textStyles.label.copyWith(color: colors.textMuted),
             ),
             loading: () => const SizedBox.shrink(),
             error: (_, _) => const SizedBox.shrink(),
@@ -66,9 +61,7 @@ class ExercisesListScreen extends ConsumerWidget {
                     hintText: l10n.exercisesSearchPlaceholder,
                     initialValue: filter.query,
                     onChanged: (val) {
-                      ref
-                          .read(exerciseFilterProvider.notifier)
-                          .setQuery(val);
+                      ref.read(exerciseFilterProvider.notifier).setQuery(val);
                     },
                   ),
                   const SizedBox(height: GcSpacing.md),
@@ -76,9 +69,7 @@ class ExercisesListScreen extends ConsumerWidget {
                     items: filterItems,
                     selectedValue: filter.group,
                     onSelected: (group) {
-                      ref
-                          .read(exerciseFilterProvider.notifier)
-                          .setGroup(group);
+                      ref.read(exerciseFilterProvider.notifier).setGroup(group);
                     },
                   ),
                 ],
@@ -109,16 +100,13 @@ class ExercisesListScreen extends ConsumerWidget {
                   horizontal: GcSpacing.screenHorizontal,
                 ),
                 sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final exercise = exercises[index];
-                      return _ExerciseListTile(
-                        exercise: exercise,
-                        onTap: () => context.goExercise(exercise.id),
-                      );
-                    },
-                    childCount: exercises.length,
-                  ),
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    final exercise = exercises[index];
+                    return _ExerciseListTile(
+                      exercise: exercise,
+                      onTap: () => context.goExercise(exercise.id),
+                    );
+                  }, childCount: exercises.length),
                 ),
               );
             },
@@ -134,9 +122,7 @@ class ExercisesListScreen extends ConsumerWidget {
               ),
             ),
           ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 140),
-          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 140)),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -154,10 +140,7 @@ class ExercisesListScreen extends ConsumerWidget {
 }
 
 class _ExerciseListTile extends StatelessWidget {
-  const _ExerciseListTile({
-    required this.exercise,
-    required this.onTap,
-  });
+  const _ExerciseListTile({required this.exercise, required this.onTap});
 
   final Exercise exercise;
   final VoidCallback onTap;

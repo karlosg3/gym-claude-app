@@ -45,7 +45,9 @@ abstract final class WeightFormatter {
   /// Formatea equivalencia en la unidad opuesta (`≈ 159 lb` o `≈ 72,5 kg`).
   static String formatEquivalence(Weight? weight, WeightUnit currentUnit) {
     if (weight == null || weight.isZero) return '';
-    final otherUnit = currentUnit == WeightUnit.kg ? WeightUnit.lb : WeightUnit.kg;
+    final otherUnit = currentUnit == WeightUnit.kg
+        ? WeightUnit.lb
+        : WeightUnit.kg;
     final displayVal = weight.displayValue(otherUnit);
     final numStr = formatNumber(displayVal);
     return '≈ $numStr ${otherUnit.name}';

@@ -36,7 +36,8 @@ class RoutineDraft {
           _setEquals(activeDays, other.activeDays);
 
   @override
-  int get hashCode => Object.hash(name, description, Object.hashAll(activeDays));
+  int get hashCode =>
+      Object.hash(name, description, Object.hashAll(activeDays));
 
   @override
   String toString() =>

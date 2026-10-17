@@ -73,10 +73,8 @@ extension AppNavigationContext on BuildContext {
         pathParameters: {'exerciseId': '$exerciseId'},
       );
 
-  void goHistory({String? month}) => goNamed(
-    AppRoute.history.routeName,
-    queryParameters: {'month': ?month},
-  );
+  void goHistory({String? month}) =>
+      goNamed(AppRoute.history.routeName, queryParameters: {'month': ?month});
 
   void goSession(int sessionId) => goNamed(
     AppRoute.sessionDetail.routeName,

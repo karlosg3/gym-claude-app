@@ -29,10 +29,7 @@ class GcCard extends StatelessWidget {
     final bg = backgroundColor ?? c.surface;
     final border = borderColor ?? c.border;
 
-    final content = Padding(
-      padding: padding,
-      child: child,
-    );
+    final content = Padding(padding: padding, child: child);
 
     return Material(
       color: bg,
@@ -42,11 +39,7 @@ class GcCard extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       child: onTap != null
-          ? InkWell(
-              onTap: onTap,
-              borderRadius: borderRadius,
-              child: content,
-            )
+          ? InkWell(onTap: onTap, borderRadius: borderRadius, child: content)
           : content,
     );
   }

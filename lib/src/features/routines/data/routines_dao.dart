@@ -30,7 +30,9 @@ class RoutinesDao extends DatabaseAccessor<AppDatabase>
   }
 
   Future<List<GetItemsByRoutineAndDayResult>> getItemsByDay(
-      int routineId, Weekday day) {
+    int routineId,
+    Weekday day,
+  ) {
     return getItemsByRoutineAndDay(routineId, day.isoValue).get();
   }
 
@@ -63,27 +65,31 @@ class RoutinesDao extends DatabaseAccessor<AppDatabase>
   }
 
   Future<int> deleteItemsByWeekday(int routineId, Weekday day) {
-    return (delete(routineItems)
-          ..where((tbl) =>
+    return (delete(routineItems)..where(
+          (tbl) =>
               tbl.routineId.equals(routineId) &
-              tbl.weekday.equals(day.isoValue)))
+              tbl.weekday.equals(day.isoValue),
+        ))
         .go();
   }
 
   Future<int> deleteItemsNotInDays(int routineId, Set<Weekday> activeDays) {
     final activeIsoValues = activeDays.map((d) => d.isoValue).toList();
-    return (delete(routineItems)
-          ..where((tbl) =>
+    return (delete(routineItems)..where(
+          (tbl) =>
               tbl.routineId.equals(routineId) &
-              tbl.weekday.isNotIn(activeIsoValues)))
+              tbl.weekday.isNotIn(activeIsoValues),
+        ))
         .go();
   }
 
   Future<int> getNextItemPosition(int routineId, Weekday day) async {
     final query = selectOnly(routineItems)
       ..addColumns([routineItems.position.max()])
-      ..where(routineItems.routineId.equals(routineId) &
-          routineItems.weekday.equals(day.isoValue));
+      ..where(
+        routineItems.routineId.equals(routineId) &
+            routineItems.weekday.equals(day.isoValue),
+      );
     final maxPos = await query
         .map((row) => row.read(routineItems.position.max()))
         .getSingleOrNull();

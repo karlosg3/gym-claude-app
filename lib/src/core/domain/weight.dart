@@ -23,7 +23,11 @@ class Weight implements Comparable<Weight> {
   /// Crea un [Weight] a partir de una entrada en la unidad especificada.
   factory Weight.fromInput(double value, WeightUnit unit) {
     if (value < 0) {
-      throw ArgumentError.value(value, 'value', 'El peso no puede ser negativo');
+      throw ArgumentError.value(
+        value,
+        'value',
+        'El peso no puede ser negativo',
+      );
     }
     return switch (unit) {
       WeightUnit.kg => Weight(value),
@@ -64,7 +68,9 @@ class Weight implements Comparable<Weight> {
   Weight operator -(Weight other) {
     final res = value - other.value;
     if (res < 0) {
-      throw StateError('La resta de pesos no puede resultar en un valor negativo');
+      throw StateError(
+        'La resta de pesos no puede resultar en un valor negativo',
+      );
     }
     return Weight(res);
   }
@@ -72,7 +78,9 @@ class Weight implements Comparable<Weight> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Weight && runtimeType == other.runtimeType && value == other.value;
+      other is Weight &&
+          runtimeType == other.runtimeType &&
+          value == other.value;
 
   @override
   int get hashCode => value.hashCode;

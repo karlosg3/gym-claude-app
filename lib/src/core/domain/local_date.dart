@@ -28,7 +28,9 @@ abstract class LocalDate with _$LocalDate implements Comparable<LocalDate> {
   factory LocalDate.parse(String formatted) {
     final parts = formatted.split('-');
     if (parts.length != 3) {
-      throw FormatException('Formato de fecha inválido (se esperaba YYYY-MM-DD): $formatted');
+      throw FormatException(
+        'Formato de fecha inválido (se esperaba YYYY-MM-DD): $formatted',
+      );
     }
     final y = int.parse(parts[0]);
     final m = int.parse(parts[1]);

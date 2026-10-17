@@ -8,10 +8,7 @@ import 'package:gym_claude/src/design_system/tokens/gc_typography.dart';
 /// Accesible desde cualquier widget mediante `context.gc`.
 @immutable
 class GcTheme extends ThemeExtension<GcTheme> {
-  const GcTheme({
-    required this.colors,
-    required this.text,
-  });
+  const GcTheme({required this.colors, required this.text});
 
   factory GcTheme.dark({
     AppAccentColor accentColor = AppAccentColor.orange,
@@ -29,10 +26,7 @@ class GcTheme extends ThemeExtension<GcTheme> {
   final GcTextStyles text;
 
   @override
-  GcTheme copyWith({
-    GcColors? colors,
-    GcTextStyles? text,
-  }) {
+  GcTheme copyWith({GcColors? colors, GcTextStyles? text}) {
     final nextColors = colors ?? this.colors;
     return GcTheme(
       colors: nextColors,
@@ -124,7 +118,9 @@ abstract final class AppTheme {
         backgroundColor: c.surface,
         elevation: 0,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(GcRadii.xxl)),
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(GcRadii.xxl),
+          ),
         ),
       ),
       extensions: <ThemeExtension<dynamic>>[gc],

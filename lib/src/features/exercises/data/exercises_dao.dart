@@ -30,9 +30,9 @@ class ExercisesDao extends DatabaseAccessor<AppDatabase>
   }
 
   Future<bool> updateExerciseRow(int id, ExercisesCompanion companion) {
-    return (update(exercises)..where((tbl) => tbl.id.equals(id)))
-        .write(companion)
-        .then((c) => c > 0);
+    return (update(
+      exercises,
+    )..where((tbl) => tbl.id.equals(id))).write(companion).then((c) => c > 0);
   }
 
   Future<bool> archiveExerciseRow(int id, DateTime archivedAt) {

@@ -59,8 +59,9 @@ class RoutinesService {
     final routine = await _repository.findById(routineId);
     if (routine != null) {
       final existingDayItems = routine.itemsFor(day);
-      final alreadyPresent =
-          existingDayItems.any((it) => it.exercise.id == exerciseId);
+      final alreadyPresent = existingDayItems.any(
+        (it) => it.exercise.id == exerciseId,
+      );
       if (alreadyPresent) {
         throw const ExerciseAlreadyInDayException();
       }
@@ -77,8 +78,7 @@ class RoutinesService {
     Weekday day,
     int oldIndex,
     int newIndex,
-  ) =>
-      _repository.reorder(routineId, day, oldIndex, newIndex);
+  ) => _repository.reorder(routineId, day, oldIndex, newIndex);
 
   /// Modifica el esquema de series y repeticiones de un item de rutina.
   Future<void> setScheme(int itemId, RepScheme scheme) {
@@ -96,7 +96,9 @@ class RoutinesService {
       throw const EmptyNameException();
     }
     if (draft.name.trim().length > 60) {
-      throw const DomainException('El nombre no puede superar los 60 caracteres');
+      throw const DomainException(
+        'El nombre no puede superar los 60 caracteres',
+      );
     }
     if (draft.activeDays.isEmpty) {
       throw const RoutineWithoutDaysException();

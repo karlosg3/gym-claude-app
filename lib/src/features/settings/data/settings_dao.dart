@@ -6,7 +6,8 @@ import 'package:gym_claude/src/core/domain/weight_unit.dart';
 part 'settings_dao.g.dart';
 
 @DriftAccessor(include: {'settings.drift'})
-class SettingsDao extends DatabaseAccessor<AppDatabase> with _$SettingsDaoMixin {
+class SettingsDao extends DatabaseAccessor<AppDatabase>
+    with _$SettingsDaoMixin {
   SettingsDao(super.db);
 
   Stream<SettingsRow> watchSettingsRow() => watchSettings().watchSingle();
@@ -14,7 +15,9 @@ class SettingsDao extends DatabaseAccessor<AppDatabase> with _$SettingsDaoMixin 
   Future<SettingsRow> getSettingsRow() => getSettings().getSingle();
 
   Future<int> updateSettingsRow(SettingsCompanion companion) {
-    return (update(settings)..where((tbl) => tbl.id.equals(1))).write(companion);
+    return (update(
+      settings,
+    )..where((tbl) => tbl.id.equals(1))).write(companion);
   }
 
   Future<int> resetDefaults() {

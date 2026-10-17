@@ -68,7 +68,11 @@ class AppLogger {
   void _writeEntryToFile(String entry) {
     if (_logFile == null) return;
     try {
-      _logFile!.writeAsStringSync('$entry\n', mode: FileMode.append, flush: false);
+      _logFile!.writeAsStringSync(
+        '$entry\n',
+        mode: FileMode.append,
+        flush: false,
+      );
     } catch (_) {
       // Ignorar fallos de escritura de logs
     }

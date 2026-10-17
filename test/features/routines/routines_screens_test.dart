@@ -83,7 +83,9 @@ void main() {
       expect(find.text('Nueva rutina'), findsWidgets);
     });
 
-    testWidgets('renderiza tarjeta de rutina con nombre, días y ejercicios', (tester) async {
+    testWidgets('renderiza tarjeta de rutina con nombre, días y ejercicios', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(800, 1200);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(tester.view.resetPhysicalSize);
@@ -92,8 +94,9 @@ void main() {
         ProviderScope(
           overrides: [
             routinesServiceProvider.overrideWithValue(mockService),
-            routinesListProvider
-                .overrideWith((ref) => Stream.value([sampleRoutine])),
+            routinesListProvider.overrideWith(
+              (ref) => Stream.value([sampleRoutine]),
+            ),
           ],
           child: const MaterialApp(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -112,7 +115,9 @@ void main() {
   });
 
   group('RoutineDetailScreen', () {
-    testWidgets('renderiza ejercicios del día y pastillas de días activos', (tester) async {
+    testWidgets('renderiza ejercicios del día y pastillas de días activos', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
@@ -141,12 +146,12 @@ void main() {
   });
 
   group('RoutineFormScreen', () {
-    testWidgets('valida nombre obligatorio al intentar guardar', (tester) async {
+    testWidgets('valida nombre obligatorio al intentar guardar', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [
-            routinesServiceProvider.overrideWithValue(mockService),
-          ],
+          overrides: [routinesServiceProvider.overrideWithValue(mockService)],
           child: const MaterialApp(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,

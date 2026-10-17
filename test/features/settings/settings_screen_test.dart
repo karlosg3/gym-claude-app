@@ -72,8 +72,7 @@ void main() {
       addTearDown(tester.view.resetPhysicalSize);
 
       const initial = AppSettings(weeklyGoal: 3);
-      when(() => mockService.setWeeklyGoal(any()))
-          .thenAnswer((_) async {});
+      when(() => mockService.setWeeklyGoal(any())).thenAnswer((_) async {});
 
       await tester.pumpWidget(buildTestableWidget(initial));
       await tester.pumpAndSettle();
@@ -102,7 +101,9 @@ void main() {
       verify(() => mockService.setDefaultUnit(WeightUnit.lb)).called(1);
     });
 
-    testWidgets('muestra opciones de colores y permite cambiar el tema', (tester) async {
+    testWidgets('muestra opciones de colores y permite cambiar el tema', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(800, 1600);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(tester.view.resetPhysicalSize);
@@ -128,7 +129,9 @@ void main() {
       verify(() => mockService.setThemeColor(AppAccentColor.blue)).called(1);
     });
 
-    testWidgets('tocar borrar datos abre diálogo de confirmación', (tester) async {
+    testWidgets('tocar borrar datos abre diálogo de confirmación', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(800, 1600);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(tester.view.resetPhysicalSize);

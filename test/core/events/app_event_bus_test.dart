@@ -35,7 +35,9 @@ void main() {
       final sub = bus.on<WorkoutCompleted>().listen(completedEvents.add);
 
       bus.emit(const AppEvent.workoutStarted(1));
-      bus.emit(const AppEvent.workoutCompleted(1, streakBefore: 2, streakAfter: 3));
+      bus.emit(
+        const AppEvent.workoutCompleted(1, streakBefore: 2, streakAfter: 3),
+      );
       bus.emit(const AppEvent.dataWiped());
 
       await Future<void>.delayed(Duration.zero);

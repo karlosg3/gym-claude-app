@@ -3,12 +3,12 @@ import 'package:meta/meta.dart';
 /// Esquema de series y repeticiones objetivo para un ejercicio en una rutina.
 @immutable
 class RepScheme {
-  const RepScheme({
-    required this.sets,
-    this.reps,
-  })  : assert(sets >= 1 && sets <= 10, 'Sets must be between 1 and 10'),
-        assert(reps == null || (reps >= 1 && reps <= 50),
-            'Reps must be between 1 and 50 or null');
+  const RepScheme({required this.sets, this.reps})
+    : assert(sets >= 1 && sets <= 10, 'Sets must be between 1 and 10'),
+      assert(
+        reps == null || (reps >= 1 && reps <= 50),
+        'Reps must be between 1 and 50 or null',
+      );
 
   /// Cantidad de series objetivo (1..10).
   final int sets;
@@ -22,10 +22,7 @@ class RepScheme {
   /// Representación en texto: "4 × 8" o "3 × máx".
   String get label => reps == null ? '$sets × máx' : '$sets × $reps';
 
-  RepScheme copyWith({
-    int? sets,
-    int? Function()? reps,
-  }) {
+  RepScheme copyWith({int? sets, int? Function()? reps}) {
     return RepScheme(
       sets: sets ?? this.sets,
       reps: reps != null ? reps() : this.reps,

@@ -115,8 +115,9 @@ class DayPills extends StatelessWidget {
         letter,
         style: textStyle.copyWith(
           color: fg,
-          fontWeight:
-              (isActive || isSelected) ? FontWeight.w700 : FontWeight.w500,
+          fontWeight: (isActive || isSelected)
+              ? FontWeight.w700
+              : FontWeight.w500,
         ),
       ),
     );

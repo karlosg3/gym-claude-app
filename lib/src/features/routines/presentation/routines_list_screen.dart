@@ -51,7 +51,8 @@ class RoutinesListScreen extends ConsumerWidget {
               140,
             ),
             itemCount: routines.length,
-            separatorBuilder: (context, index) => const SizedBox(height: GcSpacing.md),
+            separatorBuilder: (context, index) =>
+                const SizedBox(height: GcSpacing.md),
             itemBuilder: (context, index) {
               final routine = routines[index];
               return _RoutineCard(
@@ -74,10 +75,7 @@ class RoutinesListScreen extends ConsumerWidget {
 }
 
 class _RoutineCard extends StatelessWidget {
-  const _RoutineCard({
-    required this.routine,
-    required this.onTap,
-  });
+  const _RoutineCard({required this.routine, required this.onTap});
 
   final Routine routine;
   final VoidCallback onTap;
@@ -139,10 +137,7 @@ class _RoutineCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: GcSpacing.sm),
-              DayPills(
-                activeDays: routine.activeDays,
-                accentColor: accent,
-              ),
+              DayPills(activeDays: routine.activeDays, accentColor: accent),
             ],
           ),
         ],
