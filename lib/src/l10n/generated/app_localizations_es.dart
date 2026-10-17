@@ -396,4 +396,179 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get exercisesNewButton => 'Nuevo ejercicio';
+
+  @override
+  String workoutExerciseProgress(int current, int total) {
+    return 'Ejercicio $current de $total';
+  }
+
+  @override
+  String workoutTarget(String scheme) {
+    return 'Objetivo $scheme';
+  }
+
+  @override
+  String workoutPrevious(String value) {
+    return 'Anterior: $value';
+  }
+
+  @override
+  String get workoutSetsTitle => 'Series registradas';
+
+  @override
+  String get workoutNoSets =>
+      'Aún no registras series. Añade la primera abajo.';
+
+  @override
+  String get workoutNewSet => 'Nueva serie';
+
+  @override
+  String workoutWeightHint(String unit) {
+    return 'Peso ($unit)';
+  }
+
+  @override
+  String get workoutRepsHint => 'Reps';
+
+  @override
+  String get workoutAddSet => 'Añadir serie';
+
+  @override
+  String get workoutNoteHint => 'Nota del ejercicio (opcional)…';
+
+  @override
+  String get workoutPreviousExercise => 'Ejercicio anterior';
+
+  @override
+  String get workoutNext => 'Siguiente';
+
+  @override
+  String get workoutFinish => 'Finalizar sesión';
+
+  @override
+  String get workoutAddExercise => 'Añadir ejercicio';
+
+  @override
+  String get workoutMoreOptions => 'Más opciones';
+
+  @override
+  String get workoutDiscardTitle => '¿Descartar la sesión?';
+
+  @override
+  String workoutDiscardMessage(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count series',
+      one: '1 serie',
+    );
+    return 'Perderás $_temp0.';
+  }
+
+  @override
+  String get workoutDiscardConfirm => 'Descartar';
+
+  @override
+  String get workoutDiscardedNoSets =>
+      'Registra al menos una serie para encender tu racha';
+
+  @override
+  String get workoutEmptyTitle => 'Sesión sin ejercicios';
+
+  @override
+  String get workoutEmptyDesc =>
+      'Añade un ejercicio para empezar a registrar series.';
+
+  @override
+  String workoutSetLabel(int number) {
+    return 'Serie $number';
+  }
+
+  @override
+  String workoutSetValue(String weight, int reps) {
+    return '$weight × $reps reps';
+  }
+
+  @override
+  String workoutEditSetTitle(int number) {
+    return 'Editar serie $number';
+  }
+
+  @override
+  String get workoutDeleteSet => 'Borrar serie';
+
+  @override
+  String get workoutPickExerciseEmpty => 'No quedan ejercicios por añadir';
+
+  @override
+  String get workoutAlreadyActive => 'Ya tienes una sesión en curso';
+
+  @override
+  String get workoutNotActive => 'No hay ninguna sesión en curso';
+
+  @override
+  String get workoutRecordBadge => 'PR';
+
+  @override
+  String workoutNewRecord(String exercise) {
+    return '¡Nuevo récord en $exercise!';
+  }
+
+  @override
+  String get workoutStaleTitle => 'Sesión sin terminar';
+
+  @override
+  String workoutStaleMessageDay(String day) {
+    return 'Tienes una sesión sin terminar del $day.';
+  }
+
+  @override
+  String get workoutStaleMessageToday =>
+      'Tienes una sesión sin terminar de hoy.';
+
+  @override
+  String get workoutStaleFinish => 'Finalizar';
+
+  @override
+  String get workoutResumeTitle => 'Sesión en curso';
+
+  @override
+  String get workoutResumeButton => 'Reanudar sesión';
+
+  @override
+  String get summaryTitle => '¡Sesión completada!';
+
+  @override
+  String summarySubtitle(String title, String date) {
+    return '$title · $date';
+  }
+
+  @override
+  String get summaryDuration => 'duración';
+
+  @override
+  String get summarySets => 'series';
+
+  @override
+  String get summaryExercises => 'ejercicios';
+
+  @override
+  String get summaryByExercise => 'Resumen por ejercicio';
+
+  @override
+  String summarySetsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count series',
+      one: '1 serie',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get summaryDone => 'Listo';
+
+  @override
+  String get summaryNotFound => 'Sesión no encontrada';
 }

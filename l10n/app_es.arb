@@ -484,5 +484,254 @@
   "exercisesNewButton": "Nuevo ejercicio",
   "@exercisesNewButton": {
     "description": "Botón para crear un nuevo ejercicio"
+  },
+  "workoutExerciseProgress": "Ejercicio {current} de {total}",
+  "@workoutExerciseProgress": {
+    "description": "Progreso dentro de la sesión",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "workoutTarget": "Objetivo {scheme}",
+  "@workoutTarget": {
+    "description": "Objetivo de series y reps del ejercicio",
+    "placeholders": {
+      "scheme": {
+        "type": "String"
+      }
+    }
+  },
+  "workoutPrevious": "Anterior: {value}",
+  "@workoutPrevious": {
+    "description": "Mejor serie de la sesión anterior",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "workoutSetsTitle": "Series registradas",
+  "@workoutSetsTitle": {
+    "description": "Título de la lista de series"
+  },
+  "workoutNoSets": "Aún no registras series. Añade la primera abajo.",
+  "@workoutNoSets": {
+    "description": "Estado vacío de series"
+  },
+  "workoutNewSet": "Nueva serie",
+  "@workoutNewSet": {
+    "description": "Título del bloque para añadir serie"
+  },
+  "workoutWeightHint": "Peso ({unit})",
+  "@workoutWeightHint": {
+    "description": "Placeholder del campo de peso",
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "workoutRepsHint": "Reps",
+  "@workoutRepsHint": {
+    "description": "Placeholder del campo de repeticiones"
+  },
+  "workoutAddSet": "Añadir serie",
+  "@workoutAddSet": {
+    "description": "Etiqueta accesible del botón de añadir serie"
+  },
+  "workoutNoteHint": "Nota del ejercicio (opcional)…",
+  "@workoutNoteHint": {
+    "description": "Placeholder de la nota"
+  },
+  "workoutPreviousExercise": "Ejercicio anterior",
+  "@workoutPreviousExercise": {
+    "description": "Etiqueta accesible del botón anterior"
+  },
+  "workoutNext": "Siguiente",
+  "@workoutNext": {
+    "description": "Botón para ir al siguiente ejercicio"
+  },
+  "workoutFinish": "Finalizar sesión",
+  "@workoutFinish": {
+    "description": "Botón para finalizar la sesión"
+  },
+  "workoutAddExercise": "Añadir ejercicio",
+  "@workoutAddExercise": {
+    "description": "Acción para añadir un ejercicio extra"
+  },
+  "workoutMoreOptions": "Más opciones",
+  "@workoutMoreOptions": {
+    "description": "Etiqueta accesible del menú de cabecera"
+  },
+  "workoutDiscardTitle": "¿Descartar la sesión?",
+  "@workoutDiscardTitle": {
+    "description": "Título del diálogo de cancelar"
+  },
+  "workoutDiscardMessage": "Perderás {count, plural, =1{1 serie} other{{count} series}}.",
+  "@workoutDiscardMessage": {
+    "description": "Mensaje del diálogo de cancelar",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "workoutDiscardConfirm": "Descartar",
+  "@workoutDiscardConfirm": {
+    "description": "Confirmar descarte"
+  },
+  "workoutDiscardedNoSets": "Registra al menos una serie para encender tu racha",
+  "@workoutDiscardedNoSets": {
+    "description": "Aviso al finalizar sin series"
+  },
+  "workoutEmptyTitle": "Sesión sin ejercicios",
+  "@workoutEmptyTitle": {
+    "description": "Título cuando la sesión no tiene ejercicios"
+  },
+  "workoutEmptyDesc": "Añade un ejercicio para empezar a registrar series.",
+  "@workoutEmptyDesc": {
+    "description": "Descripción de sesión vacía"
+  },
+  "workoutSetLabel": "Serie {number}",
+  "@workoutSetLabel": {
+    "description": "Etiqueta de la fila de serie",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "workoutSetValue": "{weight} × {reps} reps",
+  "@workoutSetValue": {
+    "description": "Valor de una serie",
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      },
+      "reps": {
+        "type": "int"
+      }
+    }
+  },
+  "workoutEditSetTitle": "Editar serie {number}",
+  "@workoutEditSetTitle": {
+    "description": "Título del diálogo de editar serie",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "workoutDeleteSet": "Borrar serie",
+  "@workoutDeleteSet": {
+    "description": "Etiqueta accesible de borrar serie"
+  },
+  "workoutPickExerciseEmpty": "No quedan ejercicios por añadir",
+  "@workoutPickExerciseEmpty": {
+    "description": "Selector de ejercicio extra vacío"
+  },
+  "workoutAlreadyActive": "Ya tienes una sesión en curso",
+  "@workoutAlreadyActive": {
+    "description": "Aviso al intentar iniciar otra sesión"
+  },
+  "workoutNotActive": "No hay ninguna sesión en curso",
+  "@workoutNotActive": {
+    "description": "Pantalla de sesión sin sesión activa"
+  },
+  "workoutRecordBadge": "PR",
+  "@workoutRecordBadge": {
+    "description": "Insignia de récord personal"
+  },
+  "workoutNewRecord": "¡Nuevo récord en {exercise}!",
+  "@workoutNewRecord": {
+    "description": "Aviso de récord durante la sesión",
+    "placeholders": {
+      "exercise": {
+        "type": "String"
+      }
+    }
+  },
+  "workoutStaleTitle": "Sesión sin terminar",
+  "@workoutStaleTitle": {
+    "description": "Título del diálogo de sesión olvidada"
+  },
+  "workoutStaleMessageDay": "Tienes una sesión sin terminar del {day}.",
+  "@workoutStaleMessageDay": {
+    "description": "Mensaje de sesión olvidada de otro día",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "workoutStaleMessageToday": "Tienes una sesión sin terminar de hoy.",
+  "@workoutStaleMessageToday": {
+    "description": "Mensaje de sesión olvidada de hoy"
+  },
+  "workoutStaleFinish": "Finalizar",
+  "@workoutStaleFinish": {
+    "description": "Finalizar sesión olvidada"
+  },
+  "workoutResumeTitle": "Sesión en curso",
+  "@workoutResumeTitle": {
+    "description": "Título de la tarjeta de reanudar en Inicio"
+  },
+  "workoutResumeButton": "Reanudar sesión",
+  "@workoutResumeButton": {
+    "description": "Botón para volver a la sesión activa"
+  },
+  "summaryTitle": "¡Sesión completada!",
+  "@summaryTitle": {
+    "description": "Título del resumen"
+  },
+  "summarySubtitle": "{title} · {date}",
+  "@summarySubtitle": {
+    "description": "Subtítulo del resumen",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "summaryDuration": "duración",
+  "@summaryDuration": {
+    "description": "Etiqueta de la estadística de duración"
+  },
+  "summarySets": "series",
+  "@summarySets": {
+    "description": "Etiqueta de la estadística de series"
+  },
+  "summaryExercises": "ejercicios",
+  "@summaryExercises": {
+    "description": "Etiqueta de la estadística de ejercicios"
+  },
+  "summaryByExercise": "Resumen por ejercicio",
+  "@summaryByExercise": {
+    "description": "Título de la lista por ejercicio"
+  },
+  "summarySetsCount": "{count, plural, =1{1 serie} other{{count} series}}",
+  "@summarySetsCount": {
+    "description": "Número de series de un ejercicio",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "summaryDone": "Listo",
+  "@summaryDone": {
+    "description": "Botón para volver a Inicio"
+  },
+  "summaryNotFound": "Sesión no encontrada",
+  "@summaryNotFound": {
+    "description": "Resumen con id inexistente"
   }
 }

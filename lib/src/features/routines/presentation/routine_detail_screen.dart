@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym_claude/src/core/domain/weekday.dart';
+import 'package:gym_claude/src/core/errors/domain_exception.dart';
 import 'package:gym_claude/src/design_system/design_system.dart';
 import 'package:gym_claude/src/features/routines/application/routines_service.dart';
 import 'package:gym_claude/src/features/routines/domain/routine.dart';
 import 'package:gym_claude/src/features/routines/domain/routine_item.dart';
 import 'package:gym_claude/src/features/routines/presentation/widgets/rep_scheme_bottom_sheet.dart';
+import 'package:gym_claude/src/features/workout/application/workout_service.dart';
 import 'package:gym_claude/src/l10n/l10n.dart';
 import 'package:gym_claude/src/routing/routes.dart';
 
@@ -101,6 +103,25 @@ class _RoutineDetailScreenState extends ConsumerState<RoutineDetailScreen> {
         aboveNavBar: true,
       );
     }
+  }
+
+  /// Entrada provisional a la sesión (fase 3); en la fase 4 se inicia desde Inicio.
+  /// Si ya hay una sesión en curso, se abre esa en lugar de crear otra.
+  Future<void> _startDay(
+    BuildContext context,
+    int routineId,
+    Weekday day,
+  ) async {
+    try {
+      await ref
+          .read(workoutServiceProvider)
+          .start(routineId: routineId, day: day);
+    } on SessionAlreadyActiveException {
+      if (context.mounted) {
+        showGcSnackBar(context, context.l10n.workoutAlreadyActive);
+      }
+    }
+    if (context.mounted) context.goWorkout();
   }
 
   static const _weekdayNames = {
@@ -286,16 +307,9 @@ class _RoutineDetailScreenState extends ConsumerState<RoutineDetailScreen> {
                     PrimaryButton(
                       icon: GcIcons.play,
                       label: l10n.routineStartDayButton,
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                              'Sesiones de entrenamiento disponibles en la Fase 3',
-                            ),
-                            duration: Duration(seconds: 2),
-                          ),
-                        );
-                      },
+                      onPressed: dayItems.isEmpty
+                          ? null
+                          : () => _startDay(context, routine.id, activeDay),
                     ),
                   ],
                 ),

@@ -104,3 +104,42 @@ final class TodayProvider
 }
 
 String _$todayHash() => r'ce98ed9cc4ee9267eb9a2399bde8b55e49e335e3';
+
+/// Hora actual cada segundo. Solo lo observan los cronómetros; nada más se reconstruye cada segundo.
+
+@ProviderFor(ticker)
+final tickerProvider = TickerProvider._();
+
+/// Hora actual cada segundo. Solo lo observan los cronómetros; nada más se reconstruye cada segundo.
+
+final class TickerProvider
+    extends
+        $FunctionalProvider<AsyncValue<DateTime>, DateTime, Stream<DateTime>>
+    with $FutureModifier<DateTime>, $StreamProvider<DateTime> {
+  /// Hora actual cada segundo. Solo lo observan los cronómetros; nada más se reconstruye cada segundo.
+  TickerProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'tickerProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$tickerHash();
+
+  @$internal
+  @override
+  $StreamProviderElement<DateTime> $createElement($ProviderPointer pointer) =>
+      $StreamProviderElement(pointer);
+
+  @override
+  Stream<DateTime> create(Ref ref) {
+    return ticker(ref);
+  }
+}
+
+String _$tickerHash() => r'217c275ee7fded64d30ab8d6124287ee7ea0a209';

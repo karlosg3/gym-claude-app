@@ -18,3 +18,11 @@ LocalDate today(Ref ref) {
   final c = ref.watch(clockProvider);
   return LocalDate.of(c.now());
 }
+
+/// Hora actual cada segundo. Solo lo observan los cronómetros; nada más se reconstruye cada segundo.
+@riverpod
+Stream<DateTime> ticker(Ref ref) async* {
+  final c = ref.watch(clockProvider);
+  yield c.now();
+  yield* Stream.periodic(const Duration(seconds: 1), (_) => c.now());
+}

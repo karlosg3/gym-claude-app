@@ -801,6 +801,276 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Nuevo ejercicio'**
   String get exercisesNewButton;
+
+  /// Progreso dentro de la sesión
+  ///
+  /// In es, this message translates to:
+  /// **'Ejercicio {current} de {total}'**
+  String workoutExerciseProgress(int current, int total);
+
+  /// Objetivo de series y reps del ejercicio
+  ///
+  /// In es, this message translates to:
+  /// **'Objetivo {scheme}'**
+  String workoutTarget(String scheme);
+
+  /// Mejor serie de la sesión anterior
+  ///
+  /// In es, this message translates to:
+  /// **'Anterior: {value}'**
+  String workoutPrevious(String value);
+
+  /// Título de la lista de series
+  ///
+  /// In es, this message translates to:
+  /// **'Series registradas'**
+  String get workoutSetsTitle;
+
+  /// Estado vacío de series
+  ///
+  /// In es, this message translates to:
+  /// **'Aún no registras series. Añade la primera abajo.'**
+  String get workoutNoSets;
+
+  /// Título del bloque para añadir serie
+  ///
+  /// In es, this message translates to:
+  /// **'Nueva serie'**
+  String get workoutNewSet;
+
+  /// Placeholder del campo de peso
+  ///
+  /// In es, this message translates to:
+  /// **'Peso ({unit})'**
+  String workoutWeightHint(String unit);
+
+  /// Placeholder del campo de repeticiones
+  ///
+  /// In es, this message translates to:
+  /// **'Reps'**
+  String get workoutRepsHint;
+
+  /// Etiqueta accesible del botón de añadir serie
+  ///
+  /// In es, this message translates to:
+  /// **'Añadir serie'**
+  String get workoutAddSet;
+
+  /// Placeholder de la nota
+  ///
+  /// In es, this message translates to:
+  /// **'Nota del ejercicio (opcional)…'**
+  String get workoutNoteHint;
+
+  /// Etiqueta accesible del botón anterior
+  ///
+  /// In es, this message translates to:
+  /// **'Ejercicio anterior'**
+  String get workoutPreviousExercise;
+
+  /// Botón para ir al siguiente ejercicio
+  ///
+  /// In es, this message translates to:
+  /// **'Siguiente'**
+  String get workoutNext;
+
+  /// Botón para finalizar la sesión
+  ///
+  /// In es, this message translates to:
+  /// **'Finalizar sesión'**
+  String get workoutFinish;
+
+  /// Acción para añadir un ejercicio extra
+  ///
+  /// In es, this message translates to:
+  /// **'Añadir ejercicio'**
+  String get workoutAddExercise;
+
+  /// Etiqueta accesible del menú de cabecera
+  ///
+  /// In es, this message translates to:
+  /// **'Más opciones'**
+  String get workoutMoreOptions;
+
+  /// Título del diálogo de cancelar
+  ///
+  /// In es, this message translates to:
+  /// **'¿Descartar la sesión?'**
+  String get workoutDiscardTitle;
+
+  /// Mensaje del diálogo de cancelar
+  ///
+  /// In es, this message translates to:
+  /// **'Perderás {count, plural, =1{1 serie} other{{count} series}}.'**
+  String workoutDiscardMessage(int count);
+
+  /// Confirmar descarte
+  ///
+  /// In es, this message translates to:
+  /// **'Descartar'**
+  String get workoutDiscardConfirm;
+
+  /// Aviso al finalizar sin series
+  ///
+  /// In es, this message translates to:
+  /// **'Registra al menos una serie para encender tu racha'**
+  String get workoutDiscardedNoSets;
+
+  /// Título cuando la sesión no tiene ejercicios
+  ///
+  /// In es, this message translates to:
+  /// **'Sesión sin ejercicios'**
+  String get workoutEmptyTitle;
+
+  /// Descripción de sesión vacía
+  ///
+  /// In es, this message translates to:
+  /// **'Añade un ejercicio para empezar a registrar series.'**
+  String get workoutEmptyDesc;
+
+  /// Etiqueta de la fila de serie
+  ///
+  /// In es, this message translates to:
+  /// **'Serie {number}'**
+  String workoutSetLabel(int number);
+
+  /// Valor de una serie
+  ///
+  /// In es, this message translates to:
+  /// **'{weight} × {reps} reps'**
+  String workoutSetValue(String weight, int reps);
+
+  /// Título del diálogo de editar serie
+  ///
+  /// In es, this message translates to:
+  /// **'Editar serie {number}'**
+  String workoutEditSetTitle(int number);
+
+  /// Etiqueta accesible de borrar serie
+  ///
+  /// In es, this message translates to:
+  /// **'Borrar serie'**
+  String get workoutDeleteSet;
+
+  /// Selector de ejercicio extra vacío
+  ///
+  /// In es, this message translates to:
+  /// **'No quedan ejercicios por añadir'**
+  String get workoutPickExerciseEmpty;
+
+  /// Aviso al intentar iniciar otra sesión
+  ///
+  /// In es, this message translates to:
+  /// **'Ya tienes una sesión en curso'**
+  String get workoutAlreadyActive;
+
+  /// Pantalla de sesión sin sesión activa
+  ///
+  /// In es, this message translates to:
+  /// **'No hay ninguna sesión en curso'**
+  String get workoutNotActive;
+
+  /// Insignia de récord personal
+  ///
+  /// In es, this message translates to:
+  /// **'PR'**
+  String get workoutRecordBadge;
+
+  /// Aviso de récord durante la sesión
+  ///
+  /// In es, this message translates to:
+  /// **'¡Nuevo récord en {exercise}!'**
+  String workoutNewRecord(String exercise);
+
+  /// Título del diálogo de sesión olvidada
+  ///
+  /// In es, this message translates to:
+  /// **'Sesión sin terminar'**
+  String get workoutStaleTitle;
+
+  /// Mensaje de sesión olvidada de otro día
+  ///
+  /// In es, this message translates to:
+  /// **'Tienes una sesión sin terminar del {day}.'**
+  String workoutStaleMessageDay(String day);
+
+  /// Mensaje de sesión olvidada de hoy
+  ///
+  /// In es, this message translates to:
+  /// **'Tienes una sesión sin terminar de hoy.'**
+  String get workoutStaleMessageToday;
+
+  /// Finalizar sesión olvidada
+  ///
+  /// In es, this message translates to:
+  /// **'Finalizar'**
+  String get workoutStaleFinish;
+
+  /// Título de la tarjeta de reanudar en Inicio
+  ///
+  /// In es, this message translates to:
+  /// **'Sesión en curso'**
+  String get workoutResumeTitle;
+
+  /// Botón para volver a la sesión activa
+  ///
+  /// In es, this message translates to:
+  /// **'Reanudar sesión'**
+  String get workoutResumeButton;
+
+  /// Título del resumen
+  ///
+  /// In es, this message translates to:
+  /// **'¡Sesión completada!'**
+  String get summaryTitle;
+
+  /// Subtítulo del resumen
+  ///
+  /// In es, this message translates to:
+  /// **'{title} · {date}'**
+  String summarySubtitle(String title, String date);
+
+  /// Etiqueta de la estadística de duración
+  ///
+  /// In es, this message translates to:
+  /// **'duración'**
+  String get summaryDuration;
+
+  /// Etiqueta de la estadística de series
+  ///
+  /// In es, this message translates to:
+  /// **'series'**
+  String get summarySets;
+
+  /// Etiqueta de la estadística de ejercicios
+  ///
+  /// In es, this message translates to:
+  /// **'ejercicios'**
+  String get summaryExercises;
+
+  /// Título de la lista por ejercicio
+  ///
+  /// In es, this message translates to:
+  /// **'Resumen por ejercicio'**
+  String get summaryByExercise;
+
+  /// Número de series de un ejercicio
+  ///
+  /// In es, this message translates to:
+  /// **'{count, plural, =1{1 serie} other{{count} series}}'**
+  String summarySetsCount(int count);
+
+  /// Botón para volver a Inicio
+  ///
+  /// In es, this message translates to:
+  /// **'Listo'**
+  String get summaryDone;
+
+  /// Resumen con id inexistente
+  ///
+  /// In es, this message translates to:
+  /// **'Sesión no encontrada'**
+  String get summaryNotFound;
 }
 
 class _AppLocalizationsDelegate
