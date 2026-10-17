@@ -95,8 +95,8 @@ flutter build apk --debug                                  # comprobar que Andro
 |---|---|---|---|
 | 0 | Fundaciones | Completada | Core, Shared Kernel, Drift base, Design System, GoRouter 4 pestañas, l10n (`es`) y `architecture_test` en verde |
 | 1 | Ajustes + Ejercicios | Completada | Settings (singleton id=1, wipeAllData atómico con evento en bus, debounce, stepper, switches), Exercises (12 ejercicios semilla, búsqueda sin acentos/case-insensitive, borrado físico/lógico según historial, restauración al recrear), pantallas List/Detail/Form y 74 tests en verde |
-| 2 | Rutinas | Pendiente | |
-| 3 | Sesión activa | Pendiente | |
+| 2 | Rutinas | Completada | Lista, formulario, detalle por día, agregar/quitar/reordenar, esquema `series × reps`, `DayPills` |
+| 3 | Sesión activa | Completada | Esquema v4 (`workout.drift`), `WorkoutService` (start/addSet/finish/discard, récords una vez por sesión), `ProgressService` mínimo (peso anterior, máximo previo, historial ⇒ archivar), pantallas Sesión y Resumen, reanudar desde Inicio, sesión olvidada (> 6 h), wakelock. Pendiente para fase 4: contador real de racha en el resumen (`streakReader`) |
 | 4 | Progreso + Inicio | Pendiente | |
 | 5 | Historial | Pendiente | |
 | 6 | Exportación | Pendiente | |
