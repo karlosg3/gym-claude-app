@@ -49,4 +49,4 @@ final class SettingsServiceProvider
   }
 }
 
-String _$settingsServiceHash() => r'ae7f86b5f1b4e4280c550ff0006ca648d6aea0f6';
+String _$settingsServiceHash() => r'c0f6ab4a416e63e0e0c4096627c2efe81bbb224c';

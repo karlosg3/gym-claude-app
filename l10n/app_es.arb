@@ -360,5 +360,129 @@
   "muscleGroupCore": "Core",
   "@muscleGroupCore": {
     "description": "Grupo muscular Core"
+  },
+  "routinesEmptyTitle": "Crea tu primera rutina",
+  "@routinesEmptyTitle": {
+    "description": "Título cuando no hay rutinas"
+  },
+  "routinesEmptyDesc": "Organiza tus entrenamientos semanales por días y asigna ejercicios.",
+  "@routinesEmptyDesc": {
+    "description": "Descripción cuando no hay rutinas"
+  },
+  "routinesNewButton": "Nueva rutina",
+  "@routinesNewButton": {
+    "description": "Texto del botón para crear una nueva rutina"
+  },
+  "routinesExercisesAndDays": "{exercises, plural, =1{1 ejercicio} other{{exercises} ejercicios}} · {days, plural, =1{1 día} other{{days} días}}",
+  "@routinesExercisesAndDays": {
+    "description": "Resumen de ejercicios y días en la tarjeta de rutina",
+    "placeholders": {
+      "exercises": {
+        "type": "int"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "routineNewTitle": "Nueva rutina",
+  "@routineNewTitle": {
+    "description": "Título de la pantalla para crear rutina"
+  },
+  "routineEditTitle": "Editar rutina",
+  "@routineEditTitle": {
+    "description": "Título de la pantalla para editar rutina"
+  },
+  "routineNameLabel": "Nombre de la rutina",
+  "@routineNameLabel": {
+    "description": "Etiqueta del campo de nombre de rutina"
+  },
+  "routineNamePlaceholder": "Ej. Empuje / Jalón / Pierna",
+  "@routineNamePlaceholder": {
+    "description": "Placeholder de nombre de rutina"
+  },
+  "routineActiveDaysLabel": "Días activos",
+  "@routineActiveDaysLabel": {
+    "description": "Etiqueta para selector de días activos"
+  },
+  "routineDescriptionLabel": "Descripción (opcional)",
+  "@routineDescriptionLabel": {
+    "description": "Etiqueta de descripción de rutina"
+  },
+  "routineDescriptionPlaceholder": "Breve resumen de tu enfoque",
+  "@routineDescriptionPlaceholder": {
+    "description": "Placeholder de descripción de rutina"
+  },
+  "routineSaveButton": "Guardar rutina",
+  "@routineSaveButton": {
+    "description": "Botón para guardar rutina"
+  },
+  "routineDeleteTitle": "¿Eliminar rutina?",
+  "@routineDeleteTitle": {
+    "description": "Título de diálogo para confirmar borrado de rutina"
+  },
+  "routineDeleteMessage": "Se eliminará esta rutina y sus asignaciones. Las sesiones pasadas registradas se conservarán.",
+  "@routineDeleteMessage": {
+    "description": "Mensaje de confirmación de borrado de rutina"
+  },
+  "routineEmptyDay": "Sin ejercicios. Toca “Agregar” para asignar uno.",
+  "@routineEmptyDay": {
+    "description": "Texto cuando un día no tiene ejercicios asignados"
+  },
+  "routineAddExerciseButton": "Agregar ejercicio",
+  "@routineAddExerciseButton": {
+    "description": "Botón para agregar ejercicio a un día"
+  },
+  "routineStartDayButton": "Empezar este día",
+  "@routineStartDayButton": {
+    "description": "Botón para iniciar entrenamiento con el día seleccionado"
+  },
+  "routineEditSchemeTitle": "Esquema de series y repeticiones",
+  "@routineEditSchemeTitle": {
+    "description": "Título del diálogo para editar series y repeticiones"
+  },
+  "routineSetsLabel": "Series",
+  "@routineSetsLabel": {
+    "description": "Etiqueta de número de series"
+  },
+  "routineRepsLabel": "Repeticiones",
+  "@routineRepsLabel": {
+    "description": "Etiqueta de número de repeticiones"
+  },
+  "routineRepsToFailure": "Al fallo (máx)",
+  "@routineRepsToFailure": {
+    "description": "Opción de repeticiones al fallo"
+  },
+  "routineExerciseAdded": "Ejercicio agregado a la rutina",
+  "@routineExerciseAdded": {
+    "description": "Mensaje de retroalimentación al agregar ejercicio"
+  },
+  "routineExerciseRemoved": "Ejercicio quitado",
+  "@routineExerciseRemoved": {
+    "description": "Mensaje de retroalimentación al quitar ejercicio"
+  },
+  "routineNotFound": "Rutina no encontrada",
+  "@routineNotFound": {
+    "description": "Texto cuando la rutina solicitada no existe"
+  },
+  "commonSave": "Guardar",
+  "@commonSave": {
+    "description": "Texto genérico para guardar"
+  },
+  "commonCancel": "Cancelar",
+  "@commonCancel": {
+    "description": "Texto genérico para cancelar"
+  },
+  "commonDelete": "Eliminar",
+  "@commonDelete": {
+    "description": "Texto genérico para eliminar"
+  },
+  "commonEdit": "Editar",
+  "@commonEdit": {
+    "description": "Texto genérico para editar"
+  },
+  "exercisesNewButton": "Nuevo ejercicio",
+  "@exercisesNewButton": {
+    "description": "Botón para crear un nuevo ejercicio"
   }
 }

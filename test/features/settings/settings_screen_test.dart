@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gym_claude/src/core/domain/app_accent_color.dart';
 import 'package:gym_claude/src/core/domain/weight_unit.dart';
+import 'package:gym_claude/src/design_system/tokens/gc_icons.dart';
 import 'package:gym_claude/src/features/settings/application/settings_service.dart';
 import 'package:gym_claude/src/features/settings/domain/app_settings.dart';
 import 'package:gym_claude/src/features/settings/presentation/settings_providers.dart';
@@ -114,6 +115,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Color de acento'), findsOneWidget);
+      expect(find.byIcon(GcIcons.exercises), findsNWidgets(5));
       expect(find.text('Naranja'), findsOneWidget);
       expect(find.text('Azul'), findsOneWidget);
       expect(find.text('Verde'), findsOneWidget);

@@ -54,3 +54,42 @@ final class ExercisesServiceProvider
 }
 
 String _$exercisesServiceHash() => r'55ac620413c4a3d887cb76138d567569868d17f1';
+
+@ProviderFor(allExercises)
+final allExercisesProvider = AllExercisesProvider._();
+
+final class AllExercisesProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<Exercise>>,
+          List<Exercise>,
+          Stream<List<Exercise>>
+        >
+    with $FutureModifier<List<Exercise>>, $StreamProvider<List<Exercise>> {
+  AllExercisesProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'allExercisesProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$allExercisesHash();
+
+  @$internal
+  @override
+  $StreamProviderElement<List<Exercise>> $createElement(
+    $ProviderPointer pointer,
+  ) => $StreamProviderElement(pointer);
+
+  @override
+  Stream<List<Exercise>> create(Ref ref) {
+    return allExercises(ref);
+  }
+}
+
+String _$allExercisesHash() => r'4307aeaad775c8b369c40eb097bc80af97c29d9e';

@@ -34,6 +34,21 @@ class ExercisesListScreen extends ConsumerWidget {
     ];
 
     return GcScaffold(
+      title: l10n.navExercises,
+      actions: [
+        Center(
+          child: countAsync.when(
+            data: (count) => Text(
+              l10n.exercisesCount(count),
+              style: textStyles.label.copyWith(
+                color: colors.textMuted,
+              ),
+            ),
+            loading: () => const SizedBox.shrink(),
+            error: (_, _) => const SizedBox.shrink(),
+          ),
+        ),
+      ],
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -41,36 +56,12 @@ class ExercisesListScreen extends ConsumerWidget {
               padding: const EdgeInsets.only(
                 left: GcSpacing.screenHorizontal,
                 right: GcSpacing.screenHorizontal,
-                top: GcSpacing.sm,
+                top: GcSpacing.xs,
                 bottom: GcSpacing.md,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          l10n.navExercises,
-                          style: textStyles.display.copyWith(fontSize: 26),
-                        ),
-                      ),
-                      countAsync.when(
-                        data: (count) => Text(
-                          l10n.exercisesCount(count),
-                          style: textStyles.label.copyWith(
-                            color: colors.textMuted,
-                          ),
-                        ),
-                        loading: () => const SizedBox.shrink(),
-                        error: (_, _) => const SizedBox.shrink(),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: GcSpacing.md),
                   GcSearchField(
                     hintText: l10n.exercisesSearchPlaceholder,
                     initialValue: filter.query,
@@ -144,11 +135,12 @@ class ExercisesListScreen extends ConsumerWidget {
             ),
           ),
           const SliverToBoxAdapter(
-            child: SizedBox(height: GcSpacing.xxl * 2),
+            child: SizedBox(height: 140),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'exercises_fab',
         onPressed: () => context.pushExerciseNew(),
         backgroundColor: colors.accent,
         foregroundColor: colors.background,

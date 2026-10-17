@@ -630,38 +630,62 @@ class _AccentColorOptionButton extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: color,
-                  border: isSelected
-                      ? Border.all(
-                          color: Colors.white,
-                          width: 2.5,
-                        )
-                      : Border.all(
-                          color: colors.borderStrong,
-                          width: 1.5,
-                        ),
-                  boxShadow: isSelected
-                      ? [
-                          BoxShadow(
-                            color: color.withValues(alpha: 0.4),
-                            blurRadius: 8,
-                            spreadRadius: 2,
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: colors.background,
+                      borderRadius: BorderRadius.circular(13),
+                      border: Border.all(
+                        color: isSelected ? color : colors.borderStrong,
+                        width: isSelected ? 2.0 : 1.5,
+                      ),
+                      boxShadow: isSelected
+                          ? [
+                              BoxShadow(
+                                color: color.withValues(alpha: 0.35),
+                                blurRadius: 8,
+                                spreadRadius: 1,
+                              ),
+                            ]
+                          : null,
+                    ),
+                    child: Center(
+                      child: Icon(
+                        GcIcons.exercises,
+                        size: 24,
+                        color: color,
+                      ),
+                    ),
+                  ),
+                  if (isSelected)
+                    Positioned(
+                      top: -4,
+                      right: -4,
+                      child: Container(
+                        width: 18,
+                        height: 18,
+                        decoration: BoxDecoration(
+                          color: color,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: colors.surface,
+                            width: 1.5,
                           ),
-                        ]
-                      : null,
-                ),
-                child: isSelected
-                    ? const Icon(
-                        Icons.check,
-                        size: 20,
-                        color: Colors.white,
-                      )
-                    : null,
+                        ),
+                        child: const Center(
+                          child: Icon(
+                            Icons.check,
+                            size: 11,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
               ),
               const SizedBox(height: GcSpacing.xs + 2),
               Text(

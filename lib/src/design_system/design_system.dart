@@ -15,6 +15,7 @@ export 'tokens/gc_radii.dart';
 export 'tokens/gc_spacing.dart';
 export 'tokens/gc_typography.dart';
 export 'widgets/async_value_view.dart';
+export 'widgets/day_pills.dart';
 export 'widgets/empty_state.dart';
 export 'widgets/gc_buttons.dart';
 export 'widgets/gc_card.dart';

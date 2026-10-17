@@ -154,3 +154,9 @@ ExercisesService exercisesService(Ref ref) {
     clock: clk,
   );
 }
+
+@riverpod
+Stream<List<Exercise>> allExercises(Ref ref) {
+  final service = ref.watch(exercisesServiceProvider);
+  return service.watchLibrary();
+}

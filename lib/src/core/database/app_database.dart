@@ -1,10 +1,13 @@
 import 'package:drift/drift.dart';
 import 'package:gym_claude/src/core/database/connection.dart';
+import 'package:gym_claude/src/core/database/converters.dart';
 import 'package:gym_claude/src/core/database/transaction_runner.dart';
 import 'package:gym_claude/src/core/domain/app_accent_color.dart';
 import 'package:gym_claude/src/core/domain/muscle_group.dart';
+import 'package:gym_claude/src/core/domain/weekday.dart';
 import 'package:gym_claude/src/core/domain/weight_unit.dart';
 import 'package:gym_claude/src/features/exercises/data/exercises_dao.dart';
+import 'package:gym_claude/src/features/routines/data/routines_dao.dart';
 import 'package:gym_claude/src/features/settings/data/settings_dao.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -15,17 +18,19 @@ part 'app_database.g.dart';
   include: {
     '../../features/settings/data/settings.drift',
     '../../features/exercises/data/exercises.drift',
+    '../../features/routines/data/routines.drift',
   },
   daos: [
     SettingsDao,
     ExercisesDao,
+    RoutinesDao,
   ],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? openConnection());
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -52,6 +57,10 @@ class AppDatabase extends _$AppDatabase {
         onUpgrade: (m, from, to) async {
           if (from < 2) {
             await m.addColumn(settings, settings.themeColor);
+          }
+          if (from < 3) {
+            await m.createTable(routines);
+            await m.createTable(routineItems);
           }
         },
       );

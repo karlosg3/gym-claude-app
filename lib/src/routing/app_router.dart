@@ -1,11 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gym_claude/src/core/domain/weekday.dart';
 import 'package:gym_claude/src/features/exercises/presentation/exercise_detail_screen.dart';
 import 'package:gym_claude/src/features/exercises/presentation/exercise_form_screen.dart';
 import 'package:gym_claude/src/features/exercises/presentation/exercises_list_screen.dart';
 import 'package:gym_claude/src/features/history/presentation/history_screen.dart';
 import 'package:gym_claude/src/features/home/presentation/home_screen.dart';
+import 'package:gym_claude/src/features/routines/presentation/routine_add_exercise_screen.dart';
+import 'package:gym_claude/src/features/routines/presentation/routine_detail_screen.dart';
+import 'package:gym_claude/src/features/routines/presentation/routine_form_screen.dart';
 import 'package:gym_claude/src/features/routines/presentation/routines_list_screen.dart';
 import 'package:gym_claude/src/features/settings/presentation/settings_screen.dart';
 import 'package:gym_claude/src/routing/routes.dart';
@@ -64,6 +68,56 @@ GoRouter createAppRouter({String? initialLocation}) {
                 name: AppRoute.routines.routeName,
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: RoutinesListScreen()),
+                routes: [
+                  GoRoute(
+                    path: AppRoute.routineNew.pathSegment,
+                    name: AppRoute.routineNew.routeName,
+                    builder: (context, state) => const RoutineFormScreen(),
+                  ),
+                  GoRoute(
+                    path: AppRoute.routineDetail.pathSegment,
+                    name: AppRoute.routineDetail.routeName,
+                    builder: (context, state) {
+                      final id =
+                          int.tryParse(state.pathParameters['routineId'] ?? '') ??
+                              0;
+                      final day =
+                          int.tryParse(state.uri.queryParameters['day'] ?? '');
+                      return RoutineDetailScreen(routineId: id, initialDay: day);
+                    },
+                    routes: [
+                      GoRoute(
+                        path: AppRoute.routineEdit.pathSegment,
+                        name: AppRoute.routineEdit.routeName,
+                        builder: (context, state) {
+                          final id = int.tryParse(
+                                state.pathParameters['routineId'] ?? '',
+                              ) ??
+                              0;
+                          return RoutineFormScreen(routineId: id);
+                        },
+                      ),
+                      GoRoute(
+                        path: AppRoute.routineDayAddExercise.pathSegment,
+                        name: AppRoute.routineDayAddExercise.routeName,
+                        builder: (context, state) {
+                          final routineId = int.tryParse(
+                                state.pathParameters['routineId'] ?? '',
+                              ) ??
+                              0;
+                          final weekday = int.tryParse(
+                                state.pathParameters['weekday'] ?? '',
+                              ) ??
+                              1;
+                          return RoutineAddExerciseScreen(
+                            routineId: routineId,
+                            weekday: Weekday.fromIso(weekday),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),

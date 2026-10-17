@@ -1,0 +1,53 @@
+import 'package:gym_claude/src/core/database/converters.dart';
+import '../../exercises/data/exercises.drift';
+
+CREATE TABLE routines (
+  id           INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  name         TEXT    NOT NULL CHECK (length(trim(name)) BETWEEN 1 AND 60),
+  description  TEXT    NOT NULL DEFAULT '',
+  active_days  INTEGER NOT NULL MAPPED BY `const WeekdaySetConverter()`
+                 CHECK (active_days BETWEEN 1 AND 127),
+  sort_order   INTEGER NOT NULL DEFAULT 0,
+  created_at   DATETIME NOT NULL
+) AS RoutineRow;
+
+CREATE TABLE routine_items (
+  id           INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  routine_id   INTEGER NOT NULL REFERENCES routines (id)  ON DELETE CASCADE,
+  weekday      INTEGER NOT NULL CHECK (weekday BETWEEN 1 AND 7),
+  exercise_id  INTEGER NOT NULL REFERENCES exercises (id) ON DELETE CASCADE,
+  position     INTEGER NOT NULL CHECK (position >= 0),
+  target_sets  INTEGER NOT NULL DEFAULT 3 CHECK (target_sets BETWEEN 1 AND 10),
+  target_reps  INTEGER DEFAULT 10 CHECK (target_reps IS NULL OR target_reps BETWEEN 1 AND 50),
+  UNIQUE (routine_id, weekday, exercise_id)
+) AS RoutineItemRow;
+
+CREATE INDEX routine_items_day      ON routine_items (routine_id, weekday, position);
+CREATE INDEX routine_items_exercise ON routine_items (exercise_id);
+
+watchAllWithItems:
+SELECT r.**, ri.**, e.id AS exercise_id, e.name AS exercise_name,
+       e.muscle_group AS exercise_group, e.unit AS exercise_unit
+FROM routines r
+LEFT JOIN routine_items ri ON ri.routine_id = r.id
+LEFT JOIN exercises e      ON e.id = ri.exercise_id
+ORDER BY r.sort_order, r.id, ri.weekday, ri.position;
+
+watchPlannedWeekdays: SELECT DISTINCT weekday FROM routine_items;
+
+watchPlanStart: SELECT MIN(created_at) FROM routines;
+
+watchForWeekday:
+SELECT * FROM routines
+WHERE EXISTS (SELECT 1 FROM routine_items ri WHERE ri.routine_id = routines.id AND ri.weekday = :weekday)
+ORDER BY sort_order, id;
+
+getRoutineById: SELECT * FROM routines WHERE id = :id;
+
+getItemsByRoutineAndDay:
+SELECT ri.**, e.id AS exercise_id, e.name AS exercise_name,
+       e.muscle_group AS exercise_group, e.unit AS exercise_unit
+FROM routine_items ri
+JOIN exercises e ON e.id = ri.exercise_id
+WHERE ri.routine_id = :routineId AND ri.weekday = :weekday
+ORDER BY ri.position;

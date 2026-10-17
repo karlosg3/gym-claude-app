@@ -627,6 +627,180 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Core'**
   String get muscleGroupCore;
+
+  /// Título cuando no hay rutinas
+  ///
+  /// In es, this message translates to:
+  /// **'Crea tu primera rutina'**
+  String get routinesEmptyTitle;
+
+  /// Descripción cuando no hay rutinas
+  ///
+  /// In es, this message translates to:
+  /// **'Organiza tus entrenamientos semanales por días y asigna ejercicios.'**
+  String get routinesEmptyDesc;
+
+  /// Texto del botón para crear una nueva rutina
+  ///
+  /// In es, this message translates to:
+  /// **'Nueva rutina'**
+  String get routinesNewButton;
+
+  /// Resumen de ejercicios y días en la tarjeta de rutina
+  ///
+  /// In es, this message translates to:
+  /// **'{exercises, plural, =1{1 ejercicio} other{{exercises} ejercicios}} · {days, plural, =1{1 día} other{{days} días}}'**
+  String routinesExercisesAndDays(int exercises, int days);
+
+  /// Título de la pantalla para crear rutina
+  ///
+  /// In es, this message translates to:
+  /// **'Nueva rutina'**
+  String get routineNewTitle;
+
+  /// Título de la pantalla para editar rutina
+  ///
+  /// In es, this message translates to:
+  /// **'Editar rutina'**
+  String get routineEditTitle;
+
+  /// Etiqueta del campo de nombre de rutina
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre de la rutina'**
+  String get routineNameLabel;
+
+  /// Placeholder de nombre de rutina
+  ///
+  /// In es, this message translates to:
+  /// **'Ej. Empuje / Jalón / Pierna'**
+  String get routineNamePlaceholder;
+
+  /// Etiqueta para selector de días activos
+  ///
+  /// In es, this message translates to:
+  /// **'Días activos'**
+  String get routineActiveDaysLabel;
+
+  /// Etiqueta de descripción de rutina
+  ///
+  /// In es, this message translates to:
+  /// **'Descripción (opcional)'**
+  String get routineDescriptionLabel;
+
+  /// Placeholder de descripción de rutina
+  ///
+  /// In es, this message translates to:
+  /// **'Breve resumen de tu enfoque'**
+  String get routineDescriptionPlaceholder;
+
+  /// Botón para guardar rutina
+  ///
+  /// In es, this message translates to:
+  /// **'Guardar rutina'**
+  String get routineSaveButton;
+
+  /// Título de diálogo para confirmar borrado de rutina
+  ///
+  /// In es, this message translates to:
+  /// **'¿Eliminar rutina?'**
+  String get routineDeleteTitle;
+
+  /// Mensaje de confirmación de borrado de rutina
+  ///
+  /// In es, this message translates to:
+  /// **'Se eliminará esta rutina y sus asignaciones. Las sesiones pasadas registradas se conservarán.'**
+  String get routineDeleteMessage;
+
+  /// Texto cuando un día no tiene ejercicios asignados
+  ///
+  /// In es, this message translates to:
+  /// **'Sin ejercicios. Toca “Agregar” para asignar uno.'**
+  String get routineEmptyDay;
+
+  /// Botón para agregar ejercicio a un día
+  ///
+  /// In es, this message translates to:
+  /// **'Agregar ejercicio'**
+  String get routineAddExerciseButton;
+
+  /// Botón para iniciar entrenamiento con el día seleccionado
+  ///
+  /// In es, this message translates to:
+  /// **'Empezar este día'**
+  String get routineStartDayButton;
+
+  /// Título del diálogo para editar series y repeticiones
+  ///
+  /// In es, this message translates to:
+  /// **'Esquema de series y repeticiones'**
+  String get routineEditSchemeTitle;
+
+  /// Etiqueta de número de series
+  ///
+  /// In es, this message translates to:
+  /// **'Series'**
+  String get routineSetsLabel;
+
+  /// Etiqueta de número de repeticiones
+  ///
+  /// In es, this message translates to:
+  /// **'Repeticiones'**
+  String get routineRepsLabel;
+
+  /// Opción de repeticiones al fallo
+  ///
+  /// In es, this message translates to:
+  /// **'Al fallo (máx)'**
+  String get routineRepsToFailure;
+
+  /// Mensaje de retroalimentación al agregar ejercicio
+  ///
+  /// In es, this message translates to:
+  /// **'Ejercicio agregado a la rutina'**
+  String get routineExerciseAdded;
+
+  /// Mensaje de retroalimentación al quitar ejercicio
+  ///
+  /// In es, this message translates to:
+  /// **'Ejercicio quitado'**
+  String get routineExerciseRemoved;
+
+  /// Texto cuando la rutina solicitada no existe
+  ///
+  /// In es, this message translates to:
+  /// **'Rutina no encontrada'**
+  String get routineNotFound;
+
+  /// Texto genérico para guardar
+  ///
+  /// In es, this message translates to:
+  /// **'Guardar'**
+  String get commonSave;
+
+  /// Texto genérico para cancelar
+  ///
+  /// In es, this message translates to:
+  /// **'Cancelar'**
+  String get commonCancel;
+
+  /// Texto genérico para eliminar
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminar'**
+  String get commonDelete;
+
+  /// Texto genérico para editar
+  ///
+  /// In es, this message translates to:
+  /// **'Editar'**
+  String get commonEdit;
+
+  /// Botón para crear un nuevo ejercicio
+  ///
+  /// In es, this message translates to:
+  /// **'Nuevo ejercicio'**
+  String get exercisesNewButton;
 }
 
 class _AppLocalizationsDelegate

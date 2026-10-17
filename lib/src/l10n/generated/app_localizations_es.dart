@@ -292,4 +292,108 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get muscleGroupCore => 'Core';
+
+  @override
+  String get routinesEmptyTitle => 'Crea tu primera rutina';
+
+  @override
+  String get routinesEmptyDesc =>
+      'Organiza tus entrenamientos semanales por días y asigna ejercicios.';
+
+  @override
+  String get routinesNewButton => 'Nueva rutina';
+
+  @override
+  String routinesExercisesAndDays(int exercises, int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      exercises,
+      locale: localeName,
+      other: '$exercises ejercicios',
+      one: '1 ejercicio',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days días',
+      one: '1 día',
+    );
+    return '$_temp0 · $_temp1';
+  }
+
+  @override
+  String get routineNewTitle => 'Nueva rutina';
+
+  @override
+  String get routineEditTitle => 'Editar rutina';
+
+  @override
+  String get routineNameLabel => 'Nombre de la rutina';
+
+  @override
+  String get routineNamePlaceholder => 'Ej. Empuje / Jalón / Pierna';
+
+  @override
+  String get routineActiveDaysLabel => 'Días activos';
+
+  @override
+  String get routineDescriptionLabel => 'Descripción (opcional)';
+
+  @override
+  String get routineDescriptionPlaceholder => 'Breve resumen de tu enfoque';
+
+  @override
+  String get routineSaveButton => 'Guardar rutina';
+
+  @override
+  String get routineDeleteTitle => '¿Eliminar rutina?';
+
+  @override
+  String get routineDeleteMessage =>
+      'Se eliminará esta rutina y sus asignaciones. Las sesiones pasadas registradas se conservarán.';
+
+  @override
+  String get routineEmptyDay =>
+      'Sin ejercicios. Toca “Agregar” para asignar uno.';
+
+  @override
+  String get routineAddExerciseButton => 'Agregar ejercicio';
+
+  @override
+  String get routineStartDayButton => 'Empezar este día';
+
+  @override
+  String get routineEditSchemeTitle => 'Esquema de series y repeticiones';
+
+  @override
+  String get routineSetsLabel => 'Series';
+
+  @override
+  String get routineRepsLabel => 'Repeticiones';
+
+  @override
+  String get routineRepsToFailure => 'Al fallo (máx)';
+
+  @override
+  String get routineExerciseAdded => 'Ejercicio agregado a la rutina';
+
+  @override
+  String get routineExerciseRemoved => 'Ejercicio quitado';
+
+  @override
+  String get routineNotFound => 'Rutina no encontrada';
+
+  @override
+  String get commonSave => 'Guardar';
+
+  @override
+  String get commonCancel => 'Cancelar';
+
+  @override
+  String get commonDelete => 'Eliminar';
+
+  @override
+  String get commonEdit => 'Editar';
+
+  @override
+  String get exercisesNewButton => 'Nuevo ejercicio';
 }

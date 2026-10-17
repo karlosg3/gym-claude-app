@@ -1,11 +1,11 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gym_claude/src/design_system/design_system.dart';
 import 'package:gym_claude/src/l10n/l10n.dart';
 
-/// Contenedor shell de las 4 pestañas principales con barra inferior.
-///
-/// Tocar la pestaña ya activa restablece la pila de esa rama a su ubicación inicial.
+/// Contenedor shell de las 4 pestañas principales con barra de navegación flotante
+/// tipo isla centrada con efecto estético inspirado en 'liquid glass'.
 class ScaffoldWithNavBar extends StatelessWidget {
   const ScaffoldWithNavBar({required this.navigationShell, super.key});
 
@@ -33,36 +33,93 @@ class ScaffoldWithNavBar extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: colors.background,
-      body: navigationShell,
-      bottomNavigationBar: DecoratedBox(
-        decoration: BoxDecoration(
-          color: colors.surfaceSunken,
-          border: Border(top: BorderSide(color: colors.border)),
-        ),
-        child: SafeArea(
-          top: false,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: GcSpacing.sm,
-              vertical: GcSpacing.sm,
-            ),
-            child: Row(
-              children: [
-                for (var i = 0; i < items.length; i++)
-                  Expanded(
-                    child: _NavTabButton(
-                      item: items[i],
-                      selected: i == navigationShell.currentIndex,
-                      activeColor: colors.accent,
-                      inactiveColor: colors.textFaint,
-                      labelStyle: text.micro,
-                      onTap: () => _onTapDestination(i),
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          navigationShell,
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  GcSpacing.screenHorizontal,
+                  0,
+                  GcSpacing.screenHorizontal,
+                  GcSpacing.sm,
+                ),
+                child: Center(
+                  heightFactor: 1.0,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      maxWidth: 340,
+                    ),
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.15),
+                            blurRadius: 16,
+                            offset: const Offset(0, 4),
+                            spreadRadius: -2,
+                          ),
+                          BoxShadow(
+                            color: colors.accent.withValues(alpha: 0.05),
+                            blurRadius: 10,
+                            offset: const Offset(0, 1),
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(18),
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(18),
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  const Color(0xFF2E2822).withValues(alpha: 0.15),
+                                  const Color(0xFF161310).withValues(alpha: 0.25),
+                                ],
+                              ),
+                              border: Border.all(
+                                color: Colors.white.withValues(alpha: 0.18),
+                                width: 1.0,
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                for (var i = 0; i < items.length; i++)
+                                  Expanded(
+                                    child: _NavTabButton(
+                                      item: items[i],
+                                      selected: i == navigationShell.currentIndex,
+                                      activeColor: colors.accent,
+                                      inactiveColor: colors.textMuted,
+                                      labelStyle: text.micro,
+                                      onTap: () => _onTapDestination(i),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-              ],
+                ),
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -100,26 +157,48 @@ class _NavTabButton extends StatelessWidget {
       selected: selected,
       button: true,
       label: item.label,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(GcRadii.sm),
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            minHeight: GcSpacing.minTouchTarget,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: GcSpacing.xs),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(10),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOutCubic,
+            padding: const EdgeInsets.symmetric(
+              vertical: 6,
+              horizontal: 4,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: selected
+                  ? activeColor.withValues(alpha: 0.16)
+                  : Colors.transparent,
+              border: Border.all(
+                color: selected
+                    ? activeColor.withValues(alpha: 0.28)
+                    : Colors.transparent,
+                width: 1.0,
+              ),
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(item.icon, size: GcIcons.sizeMd, color: color),
-                const SizedBox(height: GcSpacing.xs),
+                Icon(
+                  item.icon,
+                  size: GcIcons.sizeMd,
+                  color: color,
+                ),
+                const SizedBox(height: 2),
                 Text(
                   item.label,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: labelStyle.copyWith(color: color),
+                  style: labelStyle.copyWith(
+                    color: color,
+                    fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                  ),
                 ),
               ],
             ),

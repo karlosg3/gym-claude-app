@@ -11,6 +11,7 @@ class GcStepper extends StatelessWidget {
     required this.onChanged,
     this.min = 1,
     this.max = 7,
+    this.enabled = true,
     super.key,
   });
 
@@ -18,13 +19,14 @@ class GcStepper extends StatelessWidget {
   final ValueChanged<int> onChanged;
   final int min;
   final int max;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
     final colors = context.gcColors;
     final textStyles = context.gcText;
-    final canDec = value > min;
-    final canInc = value < max;
+    final canDec = enabled && value > min;
+    final canInc = enabled && value < max;
 
     return Container(
       decoration: BoxDecoration(
@@ -48,7 +50,7 @@ class GcStepper extends StatelessWidget {
               textAlign: TextAlign.center,
               style: textStyles.bodyStrong.copyWith(
                 fontWeight: FontWeight.w800,
-                color: colors.textPrimary,
+                color: enabled ? colors.textPrimary : colors.textDisabled,
               ),
             ),
           ),
