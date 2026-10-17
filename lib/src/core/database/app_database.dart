@@ -6,9 +6,13 @@ import 'package:gym_claude/src/core/domain/app_accent_color.dart';
 import 'package:gym_claude/src/core/domain/muscle_group.dart';
 import 'package:gym_claude/src/core/domain/weekday.dart';
 import 'package:gym_claude/src/core/domain/weight_unit.dart';
+import 'package:gym_claude/src/core/domain/local_date.dart';
 import 'package:gym_claude/src/features/exercises/data/exercises_dao.dart';
+import 'package:gym_claude/src/features/progress/data/progress_dao.dart';
 import 'package:gym_claude/src/features/routines/data/routines_dao.dart';
 import 'package:gym_claude/src/features/settings/data/settings_dao.dart';
+import 'package:gym_claude/src/features/workout/data/workout_dao.dart';
+import 'package:gym_claude/src/features/workout/domain/session_status.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_database.g.dart';
@@ -19,51 +23,59 @@ part 'app_database.g.dart';
     '../../features/settings/data/settings.drift',
     '../../features/exercises/data/exercises.drift',
     '../../features/routines/data/routines.drift',
+    '../../features/workout/data/workout.drift',
+    '../../features/progress/data/progress_queries.drift',
   },
-  daos: [
-    SettingsDao,
-    ExercisesDao,
-    RoutinesDao,
-  ],
+  daos: [SettingsDao, ExercisesDao, RoutinesDao, WorkoutDao, ProgressDao],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? openConnection());
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
-        beforeOpen: (details) async {
-          await customStatement('PRAGMA foreign_keys = ON');
-        },
-        onCreate: (m) async {
-          await m.createAll();
-          await into(settings).insert(
-            const SettingsCompanion(
-              id: Value(1),
-              userName: Value(''),
-              weeklyGoal: Value(3),
-              defaultUnit: Value(WeightUnit.kg),
-              themeColor: Value(AppAccentColor.orange),
-              workoutReminderEnabled: Value(true),
-              reminderMinutes: Value(1110),
-              streakRiskEnabled: Value(true),
-              recordsEnabled: Value(false),
-            ),
-          );
-          await exercisesDao.seedDefaultExercises(DateTime.now());
-        },
-        onUpgrade: (m, from, to) async {
-          if (from < 2) {
-            await m.addColumn(settings, settings.themeColor);
-          }
-          if (from < 3) {
-            await m.createTable(routines);
-            await m.createTable(routineItems);
-          }
-        },
+    beforeOpen: (details) async {
+      await customStatement('PRAGMA foreign_keys = ON');
+    },
+    onCreate: (m) async {
+      await m.createAll();
+      await into(settings).insert(
+        const SettingsCompanion(
+          id: Value(1),
+          userName: Value(''),
+          weeklyGoal: Value(3),
+          defaultUnit: Value(WeightUnit.kg),
+          themeColor: Value(AppAccentColor.orange),
+          workoutReminderEnabled: Value(true),
+          reminderMinutes: Value(1110),
+          streakRiskEnabled: Value(true),
+          recordsEnabled: Value(false),
+        ),
       );
+      await exercisesDao.seedDefaultExercises(DateTime.now());
+    },
+    onUpgrade: (m, from, to) async {
+      if (from < 2) {
+        await m.addColumn(settings, settings.themeColor);
+      }
+      if (from < 3) {
+        await m.createTable(routines);
+        await m.createTable(routineItems);
+      }
+      if (from < 4) {
+        await m.createTable(workoutSessions);
+        await m.createTable(sessionExercises);
+        await m.createTable(setRecords);
+        await m.createIndex(workoutSessionsSingleActive);
+        await m.createIndex(workoutSessionsDate);
+        await m.createIndex(workoutSessionsRoutine);
+        await m.createIndex(sessionExercisesExercise);
+        await m.createIndex(setRecordsSessionExercise);
+      }
+    },
+  );
 }
 
 @Riverpod(keepAlive: true)

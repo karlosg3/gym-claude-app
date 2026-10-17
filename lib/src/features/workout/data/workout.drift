@@ -1,0 +1,94 @@
+import 'package:gym_claude/src/core/database/converters.dart';
+import 'package:gym_claude/src/core/domain/muscle_group.dart';
+import 'package:gym_claude/src/features/workout/domain/session_status.dart';
+import '../../routines/data/routines.drift';
+import '../../exercises/data/exercises.drift';
+
+CREATE TABLE workout_sessions (
+  id            INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  routine_id    INTEGER REFERENCES routines (id) ON DELETE SET NULL,
+  title         TEXT    NOT NULL,
+  accent_group  ENUMNAME(MuscleGroup),
+  local_date    TEXT    NOT NULL MAPPED BY `const LocalDateConverter()`
+                  CHECK (local_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]'),
+  started_at    DATETIME NOT NULL,
+  ended_at      DATETIME,
+  status        ENUMNAME(SessionStatus) NOT NULL,
+  CHECK (
+    (status = 'active'    AND ended_at IS NULL) OR
+    (status = 'completed' AND ended_at IS NOT NULL AND ended_at >= started_at)
+  )
+) AS WorkoutSessionRow;
+
+-- Como máximo una sesión activa: la BD rechaza la segunda.
+CREATE UNIQUE INDEX workout_sessions_single_active ON workout_sessions (status) WHERE status = 'active';
+CREATE INDEX workout_sessions_date    ON workout_sessions (local_date);
+CREATE INDEX workout_sessions_routine ON workout_sessions (routine_id);
+
+CREATE TABLE session_exercises (
+  id             INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  session_id     INTEGER NOT NULL REFERENCES workout_sessions (id) ON DELETE CASCADE,
+  exercise_id    INTEGER NOT NULL REFERENCES exercises (id)        ON DELETE RESTRICT,
+  position       INTEGER NOT NULL CHECK (position >= 0),
+  is_bodyweight  BOOLEAN NOT NULL DEFAULT 0,
+  target_sets    INTEGER CHECK (target_sets IS NULL OR target_sets BETWEEN 1 AND 10),
+  target_reps    INTEGER CHECK (target_reps IS NULL OR target_reps BETWEEN 1 AND 50),
+  note           TEXT    NOT NULL DEFAULT '',
+  UNIQUE (session_id, exercise_id)
+) AS SessionExerciseRow;
+
+CREATE INDEX session_exercises_exercise ON session_exercises (exercise_id);
+
+CREATE TABLE set_records (
+  id                   INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  session_exercise_id  INTEGER NOT NULL REFERENCES session_exercises (id) ON DELETE CASCADE,
+  set_number           INTEGER NOT NULL CHECK (set_number >= 1),
+  weight_kg            REAL    NOT NULL DEFAULT 0 CHECK (weight_kg >= 0 AND weight_kg < 1000),
+  reps                 INTEGER NOT NULL CHECK (reps BETWEEN 1 AND 999),
+  created_at           DATETIME NOT NULL
+) AS SetRecordRow;
+
+CREATE INDEX set_records_session_exercise ON set_records (session_exercise_id, set_number);
+
+watchActiveSession: SELECT * FROM workout_sessions WHERE status = 'active';
+
+-- Sesión completa (una fila por serie). LEFT JOIN también en ejercicios: una sesión libre recién
+-- iniciada aún no tiene ninguno. Se agrupa en Dart.
+watchSessionTree:
+SELECT ws.**, se.**, sr.**, e.name AS exercise_name, e.muscle_group AS exercise_group, e.unit AS exercise_unit
+FROM workout_sessions ws
+LEFT JOIN session_exercises se ON se.session_id = ws.id
+LEFT JOIN exercises e          ON e.id = se.exercise_id
+LEFT JOIN set_records sr       ON sr.session_exercise_id = se.id
+WHERE ws.id = :session_id
+ORDER BY se.position, sr.set_number;
+
+-- Igual que watchSessionTree, para la sesión activa (evita encadenar dos streams).
+watchActiveTree:
+SELECT ws.**, se.**, sr.**, e.name AS exercise_name, e.muscle_group AS exercise_group, e.unit AS exercise_unit
+FROM workout_sessions ws
+LEFT JOIN session_exercises se ON se.session_id = ws.id
+LEFT JOIN exercises e          ON e.id = se.exercise_id
+LEFT JOIN set_records sr       ON sr.session_exercise_id = se.id
+WHERE ws.status = 'active'
+ORDER BY se.position, sr.set_number;
+
+-- Copia los ejercicios de un día de la rutina a la sesión (snapshot de objetivo y peso corporal).
+copyRoutineDay:
+INSERT INTO session_exercises (session_id, exercise_id, position, is_bodyweight, target_sets, target_reps)
+SELECT :session_id, ri.exercise_id, ri.position, e.is_bodyweight, ri.target_sets, ri.target_reps
+FROM routine_items ri
+JOIN exercises e ON e.id = ri.exercise_id
+WHERE ri.routine_id = :routine_id AND ri.weekday = :weekday AND e.archived_at IS NULL;
+
+nextExercisePosition:
+SELECT COALESCE(MAX(position), -1) + 1 FROM session_exercises WHERE session_id = :session_id;
+
+-- Siguiente número de serie.
+nextSetNumber:
+SELECT COALESCE(MAX(set_number), 0) + 1 FROM set_records WHERE session_exercise_id = :session_exercise_id;
+
+-- Renumerar tras borrar la serie n (en la misma transacción que el DELETE).
+renumberAfter:
+UPDATE set_records SET set_number = set_number - 1
+WHERE session_exercise_id = :session_exercise_id AND set_number > :deleted_number;

@@ -53,7 +53,7 @@ final class ExercisesServiceProvider
   }
 }
 
-String _$exercisesServiceHash() => r'55ac620413c4a3d887cb76138d567569868d17f1';
+String _$exercisesServiceHash() => r'ac57e217298133e543bcc948f0d33600468036c0';
 
 @ProviderFor(allExercises)
 final allExercisesProvider = AllExercisesProvider._();

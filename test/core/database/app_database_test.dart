@@ -15,8 +15,8 @@ void main() {
       await db.close();
     });
 
-    test('inicializa en memoria con schemaVersion 3', () async {
-      expect(db.schemaVersion, 3);
+    test('inicializa en memoria con schemaVersion 4', () async {
+      expect(db.schemaVersion, 4);
 
       // Verificamos que PRAGMA foreign_keys = ON esté habilitado
       final result = await db.customSelect('PRAGMA foreign_keys;').getSingle();

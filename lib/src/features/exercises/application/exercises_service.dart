@@ -8,6 +8,7 @@ import 'package:gym_claude/src/features/exercises/domain/delete_outcome.dart';
 import 'package:gym_claude/src/features/exercises/domain/exercise.dart';
 import 'package:gym_claude/src/features/exercises/domain/exercise_draft.dart';
 import 'package:gym_claude/src/features/exercises/domain/exercise_filter.dart';
+import 'package:gym_claude/src/features/progress/application/progress_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'exercises_service.g.dart';
@@ -139,7 +140,9 @@ class ExercisesService {
       throw const DomainException('El nombre no puede estar vacío');
     }
     if (name.length > 80) {
-      throw const DomainException('El nombre no puede superar los 80 caracteres');
+      throw const DomainException(
+        'El nombre no puede superar los 80 caracteres',
+      );
     }
   }
 }
@@ -148,10 +151,12 @@ class ExercisesService {
 ExercisesService exercisesService(Ref ref) {
   final repo = ref.watch(exercisesRepositoryProvider);
   final clk = ref.watch(clockProvider);
+  final progress = ref.watch(progressServiceProvider);
 
   return ExercisesService(
     repository: repo,
     clock: clk,
+    hasHistoryChecker: progress.exerciseHasHistory,
   );
 }
 
